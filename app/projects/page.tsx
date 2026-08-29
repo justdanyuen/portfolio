@@ -44,20 +44,19 @@ export default function ProjectsPage() {
         <div className="mb-4 flex items-center gap-3">
           <span className="h-2 w-2 rounded-full bg-purple" />
           <p className="text-xs font-medium uppercase tracking-[0.2em] text-purple">
-            Featured / Thesis Project
+            Thesis Project
           </p>
         </div>
 
         <h2 className="font-sans text-2xl font-semibold text-foreground">
-          Audio Visualizer Plugin
+          Surround Vocal Spectrum Visualizer - SV2
         </h2>
 
         <p className="mt-3 max-w-2xl text-base leading-relaxed text-foreground/80">
           A real-time audio visualizer plugin built in C++ with the JUCE
-          framework, designed for use directly inside a DAW. Placeholder
-          description &mdash; replace with the actual project summary:
-          what it does, the core technical challenge, and what you&apos;re
-          proud of.
+          framework, designed for use directly inside a DAW applications 
+          Including Logic Pro X, Pro Tools, Cubase, and Reaper. Exported
+          via VST3, AU, and AAX formats for full compatibility with major DAWs.
         </p>
 
         {/* Tech tags */}

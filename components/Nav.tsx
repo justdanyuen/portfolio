@@ -16,7 +16,7 @@ export default function Nav() {
           priority
         />
       </Link>
-      <div className="font-handwriting text-2xl flex items-center gap-6 font-medium">
+      <div className="text-2xl flex items-center gap-6 font-medium">
         <Link className="transition-all duration-200 hover:scale-110 hover:opacity-60"href="/">ABOUT</Link>
         <Link className="transition-all duration-200 hover:scale-110 hover:opacity-60"href="/projects">PROJECTS</Link>
         <Link className="transition-all duration-200 hover:scale-110 hover:opacity-60"href="/education">EDUCATION</Link>

@@ -5,7 +5,7 @@ import HeroText from "@/components/HeroText";
 
 export default function Home() {
   return (
-    <section className="relative flex-1 overflow-hidden px-6 sm:px-10 lg:px-16">
+    <section className="relative flex-1 overflow-hidden bg-olive px-6 sm:px-10 lg:px-16">
       <div className="mx-auto flex min-h-[75vh] max-w-7xl items-center">
         {/* Text */}
         <HeroText />
@@ -21,7 +21,7 @@ export default function Home() {
           />
 
           {/* Soft overlay so text/image blend together */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[var(--background)] via-[var(--background)]/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-olive via-olive/20 to-transparent" />
         </div>
       </div>
 

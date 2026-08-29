@@ -45,10 +45,9 @@ export default function HeroText() {
 
       <motion.p
         variants={item}
-        className="mt-6 max-w-xl text-xl leading-relaxed text-foreground/80 text-pretty"
+        className="mt-6 max-w-xl text-xl leading-relaxed text-foreground text-pretty"
       >
-        Software engineer exploring immersive audio technology, plugin
-        development, and creative tools for music production.
+        Software engineer specializing in audio technology, from studio production to building DAW plugins in C++ and JUCE.
       </motion.p>
 
       <motion.div

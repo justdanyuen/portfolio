@@ -1,12 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #6B7F5E;
+  --background: #F4F1E9;
   --foreground: #171717;
 }
 
 @theme {
+  --color-olive: #6B7F5E;
   --color-olive-light: #D9DEC7;
+  --color-purple: #6B4E9E;
+  --color-purple-light: #A98FD2;
+  --color-resume-blue: #3454A0;
+  --color-resume-blue-light: #A7BCCB;
 }
 
 @theme inline {
@@ -17,11 +22,8 @@
   --font-handwriting: var(--font-handwriting-custom);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scrollbar-gutter: stable;
 }
 
 body {

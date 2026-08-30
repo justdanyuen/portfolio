@@ -1,4 +1,5 @@
-/** @type {import('next').NextConfig} */
+import type { NextConfig } from "next";
+
 const isGithubActions = process.env.GITHUB_ACTIONS === "true";
 
 let basePath = "";
@@ -8,7 +9,7 @@ if (isGithubActions && process.env.GITHUB_REPOSITORY) {
   basePath = `/${repo}`;
 }
 
-const nextConfig = {
+const nextConfig: NextConfig = {
   output: "export",
   basePath: basePath,
   images: {
@@ -16,4 +17,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;

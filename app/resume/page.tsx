@@ -19,7 +19,17 @@ const item: Variants = {
   },
 };
 
-const skills = ["C++", "JUCE", "Python", "JavaScript", "SQL"];
+const skills = [
+  { name: "C++", url: "https://www.geeksforgeeks.org/cpp/c-plus-plus/" },
+  { name: "JUCE", url: "https://juce.com/" },
+  { name: "Python", url: "https://www.python.org/" },
+  { name: "JavaScript", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+  { name: "SQL", url: "https://www.w3schools.com/sql/" },
+  { name: "Logic Pro X", url: "https://www.apple.com/logic-pro/" },
+  { name: "Pro Tools", url: "https://www.avid.com/pro-tools" },
+  { name: "MAX/MSP", url: "https://cycling74.com/products/max/" },
+];
+
 
 export default function ResumePage() {
   return (
@@ -33,18 +43,10 @@ export default function ResumePage() {
           <motion.div variants={container} initial="hidden" animate="show">
             <motion.h1
               variants={item}
-              className="font-sans text-3xl font-semibold text-foreground sm:text-4xl"
+              className="font-sans text-3xl font-bold text-foreground sm:text-4xl"
             >
-              Resume
+              RESUME
             </motion.h1>
-
-            <motion.p
-              variants={item}
-              className="mt-4 max-w-xl text-base leading-relaxed text-foreground/80"
-            >
-              Placeholder summary line &mdash; a short intro to your resume,
-              or skip straight to the download below.
-            </motion.p>
 
             {/* Skills */}
             <motion.div variants={item} className="mt-8">
@@ -53,12 +55,15 @@ export default function ResumePage() {
               </h2>
               <div className="flex flex-wrap gap-2">
                 {skills.map((s) => (
-                  <span
-                    key={s}
-                    className="rounded-md bg-resume-blue px-3 py-1 text-xs font-medium text-white"
+                  <a
+                    key={s.name}
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-md bg-resume-blue px-3 py-1 text-xs font-medium text-white transition-opacity hover:opacity-75"
                   >
-                    {s}
-                  </span>
+                    {s.name}
+                  </a>
                 ))}
               </div>
             </motion.div>

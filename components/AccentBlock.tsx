@@ -11,12 +11,12 @@ export default function AccentBlock({ color, title, subtitle }: AccentBlockProps
       style={{ borderLeft: `3px solid ${color}` }}
     >
       <p
-        className="font-sans text-sm font-medium"
+        className="font-sans text-lg font-medium"
         style={{ color }}
       >
         {title}
       </p>
-      <p className="mt-0.5 text-xs text-foreground/70">
+      <p className="mt-0.5 text-sm text-foreground/70">
         {subtitle}
       </p>
     </div>

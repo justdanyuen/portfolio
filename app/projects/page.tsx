@@ -18,13 +18,20 @@ const item: Variants = {
   },
 };
 
-const tech = ["C++", "JUCE", "VST3", "AU", "AAX"];
+const tech = [
+  { name: "C++", url: "https://www.geeksforgeeks.org/cpp/c-plus-plus/" },
+  { name: "JUCE", url: "https://juce.com/" },
+  { name: "VST3", url: "https://steinbergmedia.github.io/vst3_dev_portal/pages/Technical+Documentation/API+Documentation/Index.html" },
+  { name: "AU", url: "https://developer.apple.com/documentation/audiotoolbox/audio-unit-v3-plug-ins" },
+  { name: "AAX", url: "https://developer.avid.com/aax/" },
+];
 
 export default function ProjectsPage() {
   return (
     <div className="relative">
       {/* Purple gradient band, fading down into the page background */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[480px] bg-gradient-to-b from-purple/60 via-purple/40 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[800px] bg-gradient-to-b from-purple via-purple/50 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[500px] bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,theme(colors.purple)_0%,transparent_70%)] opacity-70" />
 
       <motion.section
         variants={container}
@@ -34,9 +41,9 @@ export default function ProjectsPage() {
       >
       <motion.h1
         variants={item}
-        className="font-sans text-3xl font-semibold text-foreground sm:text-4xl"
+        className="font-sans text-3xl font-bold text-foreground sm:text-4xl"
       >
-        Projects
+        PROJECTS
       </motion.h1>
 
       {/* Featured project */}
@@ -44,7 +51,7 @@ export default function ProjectsPage() {
         <div className="mb-4 flex items-center gap-3">
           <span className="h-2 w-2 rounded-full bg-purple" />
           <p className="text-xs font-medium uppercase tracking-[0.2em] text-purple">
-            Thesis Project
+            Master's Thesis Project
           </p>
         </div>
 
@@ -57,17 +64,29 @@ export default function ProjectsPage() {
           framework, designed for use directly inside a DAW applications 
           Including Logic Pro X, Pro Tools, Cubase, and Reaper. Exported
           via VST3, AU, and AAX formats for full compatibility with major DAWs.
+          
         </p>
 
+        <p className="mt-3 max-w-2xl text-base leading-relaxed text-foreground/80">
+          Steming from my passion for acappella - the composition of music 
+          and audio centered around the human voice without any external
+          instruments, most notably in choir and collegiate clubs - I wanted
+          to create a new way to understand what is happening within a vocal mix.
+          Through my education at Berklee Valencia I learned fundamental concepts
+          in signal flow, audio processing, and surround sound mixing in Dolby Atmos.
+        </p>
         {/* Tech tags */}
         <div className="mt-4 flex flex-wrap gap-2">
           {tech.map((t) => (
-            <span
-              key={t}
-              className="rounded-md bg-purple px-3 py-1 text-xs font-medium text-white"
+            <a
+              key={t.name}
+              href={t.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-md bg-purple px-3 py-1 text-xs font-medium text-white transition-opacity hover:opacity-75"
             >
-              {t}
-            </span>
+              {t.name}
+            </a>
           ))}
         </div>
 

@@ -10,7 +10,7 @@
   --color-olive-light: #D9DEC7;
   --color-purple: #6B4E9E;
   --color-purple-light: #A98FD2;
-  --color-resume-blue: #3454A0;
+  --color-resume-blue: #5C7A94;
   --color-resume-blue-light: #A7BCCB;
 }
 
@@ -24,6 +24,7 @@
 
 html {
   scrollbar-gutter: stable;
+  scroll-behavior: smooth;
 }
 
 body {

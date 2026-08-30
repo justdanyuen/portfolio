@@ -26,6 +26,13 @@ const background = [
     accent: "#4A7C4E",
     anchor: "#cal-poly",
   },
+  {
+    title: "What I'm working on now",
+    subtitle: "",
+    accent: "#4C6F8C",
+    anchor: "#work",
+  },
+
 ];
 
 const berkleeGallery = [
@@ -57,16 +64,19 @@ const item: Variants = {
 const BASE_COLOR = "#E0C468";
 const BERKLEE_COLOR = "#B23B3B";
 const CAL_POLY_COLOR = "#4A7C4E";
+const WORK_COLOR = "#4C6F8C";
 
 export default function AboutPage() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
   const berkleeRef = useRef<HTMLDivElement>(null);
   const calPolyRef = useRef<HTMLDivElement>(null);
+  const workRef = useRef<HTMLDivElement>(null);
   const [activePhoto, setActivePhoto] = useState<number | null>(null);
   const [sectionFractions, setSectionFractions] = useState({
     berklee: 0.25,
     calPoly: 0.65,
+    work: 0.85,
   });
 
   const { scrollYProgress } = useScroll({
@@ -84,17 +94,19 @@ export default function AboutPage() {
       const container = scrollRef.current;
       const berklee = berkleeRef.current;
       const calPoly = calPolyRef.current;
-      if (!container || !berklee || !calPoly) return;
+      const work = workRef.current;
+      if (!container || !berklee || !calPoly || !work) return;
 
       const totalHeight = container.scrollHeight - window.innerHeight;
       if (totalHeight <= 0) return;
 
       const berkleeOffset = getOffsetWithin(berklee, container) - NAV_OFFSET;
       const calPolyOffset = getOffsetWithin(calPoly, container) - NAV_OFFSET;
-
+      const workOffset = getOffsetWithin(work, container) - NAV_OFFSET;
       setSectionFractions({
         berklee: Math.min(Math.max(berkleeOffset / totalHeight, 0), 1),
         calPoly: Math.min(Math.max(calPolyOffset / totalHeight, 0), 1),
+        work: Math.min(Math.max(workOffset / totalHeight, 0), 1),
       });
     }
 
@@ -115,17 +127,35 @@ export default function AboutPage() {
 
   // Neutral at top -> red once Berklee section is reached -> green once Cal Poly is reached
   const bandColor = useTransform(
-    scrollYProgress,
-    [
-      0,
-      Math.max(sectionFractions.berklee - 0.2, 0.01),
-      sectionFractions.berklee,
-      Math.max(sectionFractions.calPoly - 0.2, sectionFractions.berklee + 0.1),
-      sectionFractions.calPoly,
-      1,
-    ],
-    [BASE_COLOR, BASE_COLOR, BERKLEE_COLOR, BERKLEE_COLOR, CAL_POLY_COLOR, CAL_POLY_COLOR]
-  );
+  scrollYProgress,
+  [
+    0,
+    Math.max(sectionFractions.berklee - 0.2, 0.01),
+    sectionFractions.berklee,
+    Math.max(
+      sectionFractions.calPoly - 0.2,
+      sectionFractions.berklee + 0.1
+    ),
+    sectionFractions.calPoly,
+    Math.max(
+      sectionFractions.work - 0.15,
+      sectionFractions.calPoly + 0.05
+    ),
+    sectionFractions.work,
+    1,
+  ],
+  [
+    BASE_COLOR,
+    BASE_COLOR,
+    BERKLEE_COLOR,
+    BERKLEE_COLOR,
+    CAL_POLY_COLOR,
+    CAL_POLY_COLOR,
+    WORK_COLOR,
+    WORK_COLOR,
+  ]
+);
+
   const bandBackground = useMotionTemplate`linear-gradient(to bottom, ${bandColor} 0%, transparent 70%)`;
 
   const scrollCarousel = (direction: "left" | "right") => {
@@ -250,6 +280,9 @@ export default function AboutPage() {
           <h2 className="mb-4 font-sans text-4xl font-semibold text-foreground">
             Berklee
           </h2>
+          <h3 className="mb-4 font-sans text-lg font-semibold text-foreground">
+            Valencia, Spain 
+          </h3>
           <p className="text-2xl leading-relaxed text-foreground/80">
             In August 2025, I moved across the world from Northern California to Valencia,
             Spain to pursue a master's degree in Music Production, Technology, and Innovation. 
@@ -318,6 +351,9 @@ export default function AboutPage() {
           <h2 className="mb-4 font-sans text-4xl font-semibold text-foreground">
             Cal Poly
           </h2>
+          <h3 className="mb-4 font-sans text-lg font-semibold text-foreground">
+            San Luis Obispo, California
+          </h3>
           <p className="text-2xl leading-relaxed text-foreground/80">
             Placeholder copy about Cal Poly &mdash; coursework, projects,
             the thesis, and how your CS background eventually pointed back
@@ -356,14 +392,49 @@ export default function AboutPage() {
           </p>
         </div>
 
-        <div className="mt-16 max-w-xl">
-          <h2 className="mb-4 font-sans text-4xl font-semibold text-foreground">
+        <div
+          ref={workRef}
+          id="work"
+          className="mt-32 max-w-xl scroll-mt-36"
+        >          <h2 className="mb-4 font-sans text-4xl font-semibold text-foreground">
             What I&apos;m working on now
           </h2>
           <p className="text-2xl leading-relaxed text-foreground/80">
             Placeholder for current interests or ongoing projects &mdash;
             whatever you&apos;re building, learning, or exploring right
             now in audio technology.
+          </p>
+
+          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+            enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+            in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+            nulla pariatur.
+          </p>
+          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa
+            qui officia deserunt mollit anim id est laborum. Sed ut
+            perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae
+            vitae dicta sunt explicabo.
+          </p>
+          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
+            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
+            aut fugit, sed quia consequuntur magni dolores eos qui ratione
+            voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem
+            ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia
+            non numquam eius modi tempora incidunt ut labore et dolore
+            magnam aliquam quaerat voluptatem.
+          </p>
+          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
+            Ut enim ad minima veniam, quis nostrum exercitationem ullam
+            corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
+            consequatur. Quis autem vel eum iure reprehenderit qui in ea
+            voluptate velit esse quam nihil molestiae consequatur, vel illum
+            qui dolorem eum fugiat quo voluptas nulla pariatur.
           </p>
         </div>
       </section>

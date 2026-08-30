@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "motion/react";
+import { withBasePath } from "@/lib/basePath";
 
 const container: Variants = {
   hidden: {},
@@ -55,13 +56,13 @@ export default function HeroText() {
         className="mt-8 flex flex-wrap gap-6 text-sm uppercase tracking-[0.2em]"
       >
         <a
-          href="/projects"
+          href={withBasePath("/projects")}
           className="text-xl border-b border-current pb-1 transition-opacity hover:opacity-60"
         >
           View Projects
         </a>
         <a
-          href="/about"
+          href={withBasePath("/about")}
           className="text-xl border-b border-current pb-1 transition-opacity hover:opacity-60"
         >
           About Me

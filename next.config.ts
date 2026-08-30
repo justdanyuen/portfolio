@@ -1,20 +1,10 @@
 import type { NextConfig } from "next";
 
-const isGithubActions = process.env.GITHUB_ACTIONS === "true";
-
-let basePath = "";
-
-if (isGithubActions && process.env.GITHUB_REPOSITORY) {
-  const repo = process.env.GITHUB_REPOSITORY.replace(/.*?\//, "");
-  basePath = `/${repo}`;
-}
+const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
   output: "export",
-  basePath: basePath,
-  env: {
-    NEXT_PUBLIC_BASE_PATH: basePath,
-  },
+  basePath: isProd ? "/portfolio" : "",
   images: {
     unoptimized: true,
   },

@@ -37,10 +37,15 @@ export default function ResumePage() {
       {/* Steel blue gradient band, same intensity/shape as the Projects purple band */}
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[700px] bg-gradient-to-b from-resume-blue via-resume-blue/40 to-transparent opacity-80" />
 
-      <section className="w-full max-w-6xl px-6 pb-20 pt-36 sm:px-10 lg:px-16">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-start">
-          {/* Left column: text content */}
-          <motion.div variants={container} initial="hidden" animate="show">
+        <section className="w-full px-6 pb-24 pt-36 sm:px-10 lg:px-16">
+          <div className="grid max-w-[1400px] grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 xl:grid-cols-[0.7fr_1.3fr] xl:gap-20 lg:items-start">          
+          {/* Left column */}
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="lg:sticky lg:top-32"
+          >
             <motion.h1
               variants={item}
               className="font-sans text-3xl font-bold text-foreground sm:text-4xl"
@@ -48,11 +53,11 @@ export default function ResumePage() {
               RESUME
             </motion.h1>
 
-            {/* Skills */}
             <motion.div variants={item} className="mt-8">
-              <h2 className="mb-3 font-sans text-lg font-semibold text-foreground">
+              <h2 className="mb-3 font-sans text-2xl font-semibold text-foreground">
                 Skills
               </h2>
+
               <div className="flex flex-wrap gap-2">
                 {skills.map((s) => (
                   <a
@@ -60,7 +65,7 @@ export default function ResumePage() {
                     href={s.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-md bg-resume-blue px-3 py-1 text-xs font-medium text-white transition-opacity hover:opacity-75"
+                    className="rounded-md bg-resume-blue px-3 py-1 text-xs font-medium text-white transition-all hover:-translate-y-0.5 hover:opacity-80"
                   >
                     {s.name}
                   </a>
@@ -68,7 +73,6 @@ export default function ResumePage() {
               </div>
             </motion.div>
 
-            {/* Download */}
             <motion.div variants={item} className="mt-10">
               <a
                 href="/resume.pdf"
@@ -80,36 +84,49 @@ export default function ResumePage() {
             </motion.div>
           </motion.div>
 
-          {/* Right column: larger preview, sized to fit without scrolling */}
+          {/* Resume */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            className="mx-auto w-full max-w-md lg:mx-0 lg:max-w-none"
+            transition={{
+              duration: 0.9,
+              ease: [0.16, 1, 0.3, 1],
+              delay: 0.2,
+            }}
+            className="w-full max-w-[720px] justify-self-start"
           >
-            <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-resume-blue">
-              Preview
-            </p>
+            <div className="mb-4 flex items-center justify-between">
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-resume-blue">
+                Preview
+              </p>
 
-            <div className="group relative aspect-[8.5/11] max-h-[70vh] w-full overflow-hidden rounded-xl border border-resume-blue/30 shadow-lg shadow-resume-blue/10 transition-shadow duration-300 hover:shadow-xl hover:shadow-resume-blue/20 lg:mx-auto">
-              <Image
-                src="/images/resume.png"
-                alt="Resume preview"
-                fill
-                className="object-cover object-top"
-              />
-
-              {/* Hover overlay for a quick full-view link on desktop */}
               <a
                 href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute inset-0 flex items-center justify-center bg-resume-blue/0 opacity-0 transition-all duration-300 group-hover:bg-resume-blue/80 group-hover:opacity-100"
+                className="text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground transition-colors hover:text-resume-blue"
               >
-                <span className="translate-y-2 text-sm font-medium uppercase tracking-[0.15em] text-white transition-transform duration-300 group-hover:translate-y-0">
-                  Open full view
-                </span>
+                Open PDF ↗
               </a>
+            </div>
+
+            <div className="group relative aspect-[8.5/11] w-full overflow-hidden rounded-xl border border-resume-blue/20 bg-white shadow-xl shadow-black/10 transition-transform duration-500 hover:-translate-y-1">
+              <Image
+                src="/images/resume.png"
+                alt="Justin Yuen resume"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 65vw"
+                className="object-contain"
+              />
+
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open resume PDF"
+                className="absolute inset-0"
+              />
             </div>
           </motion.div>
         </div>

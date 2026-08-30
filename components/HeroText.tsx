@@ -47,7 +47,7 @@ export default function HeroText() {
         variants={item}
         className="mt-6 max-w-xl text-xl leading-relaxed text-foreground text-pretty"
       >
-        Software engineer specializing in audio technology, from studio production to building DAW plugins in C++ and JUCE.
+        Software engineer specializing in audio technology, from studio production to building DAW plugins via C++ / JUCE.
       </motion.p>
 
       <motion.div

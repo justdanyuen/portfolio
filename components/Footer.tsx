@@ -2,10 +2,10 @@ import { FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="fixed bottom-0 left-0 right-0 z-40 flex items-center justify-between border-t border-black/20 px-6 py-4 sm:px-10 lg:px-16">
+    <footer className="fixed bottom-0 left-0 right-0 z-40 flex items-center justify-between border-t border-black/20 px-6 py-4 sm:px-10 lg:px-16 backdrop-blur-md">
       <a
         href="mailto:jdyuen03@gmail.com"
-        className="text-3xl uppercase tracking-[0.2em] hover:opacity-60 transition-opacity"
+        className="text-3xl uppercase tracking-[0.2em] hover:opacity-60 transition-opacity "
       >
         Connect
       </a>

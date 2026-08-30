@@ -77,6 +77,8 @@ export default function AboutPage() {
   // as a fraction of total scrollable height, so the color band
   // lines up with the real anchors instead of a flat page-wide guess.
   useLayoutEffect(() => {
+    const NAV_OFFSET = 144; // matches scroll-mt-36, confirmed via the actual anchor-jump landing position
+
     function measure() {
       const container = scrollRef.current;
       const berklee = berkleeRef.current;
@@ -86,8 +88,8 @@ export default function AboutPage() {
       const totalHeight = container.scrollHeight - window.innerHeight;
       if (totalHeight <= 0) return;
 
-      const berkleeOffset = getOffsetWithin(berklee, container);
-      const calPolyOffset = getOffsetWithin(calPoly, container);
+      const berkleeOffset = getOffsetWithin(berklee, container) - NAV_OFFSET;
+      const calPolyOffset = getOffsetWithin(calPoly, container) - NAV_OFFSET;
 
       setSectionFractions({
         berklee: Math.min(Math.max(berkleeOffset / totalHeight, 0), 1),
@@ -115,10 +117,10 @@ export default function AboutPage() {
     scrollYProgress,
     [
       0,
-      Math.max(sectionFractions.berklee - 0.14, 0.01),
-      sectionFractions.berklee + 0.08,
-      Math.max(sectionFractions.calPoly - 0.14, sectionFractions.berklee + 0.12),
-      sectionFractions.calPoly + 0.08,
+      Math.max(sectionFractions.berklee - 0.2, 0.01),
+      sectionFractions.berklee,
+      Math.max(sectionFractions.calPoly - 0.2, sectionFractions.berklee + 0.1),
+      sectionFractions.calPoly,
       1,
     ],
     [BASE_COLOR, BASE_COLOR, BERKLEE_COLOR, BERKLEE_COLOR, CAL_POLY_COLOR, CAL_POLY_COLOR]
@@ -205,7 +207,7 @@ export default function AboutPage() {
 
             <motion.p
               variants={item}
-              className="mt-8 max-w-2xl font-handwriting text-2xl leading-relaxed text-foreground/80"
+              className="mt-8 max-w-2xl text-2xl leading-relaxed text-foreground/80"
             >
               I&apos;m a software engineer with a focus on audio technology.
               My interest in sound started in the studio, and it&apos;s
@@ -216,7 +218,7 @@ export default function AboutPage() {
 
             <motion.p
               variants={item}
-              className="mt-4 max-w-2xl font-handwriting text-2xl leading-relaxed text-foreground/80"
+              className="mt-4 max-w-2xl text-2xl leading-relaxed text-foreground/80"
             >
               Outside of coursework and projects, I spend time exploring the
               intersection of music production and real-time software
@@ -242,12 +244,14 @@ export default function AboutPage() {
           </motion.div>
         </div>
 
+        <section className="w-full max-w-6xl px-6 pb-32 pt-16 sm:px-10 lg:px-16 mt-12"></section>
+
         {/* Berklee text */}
         <div ref={berkleeRef} id="berklee" className="mt-24 max-w-3xl scroll-mt-36">
           <h2 className="mb-4 font-sans text-4xl font-semibold text-foreground">
             Berklee
           </h2>
-          <p className="text-2xl font-handwriting leading-relaxed text-foreground/80">
+          <p className="text-2xl leading-relaxed text-foreground/80">
             In August 2025, I moved across the world from Northern California to Valencia,
             Spain to pursue a master's degree in Music Production, Technology, and Innovation. 
             I spent a year at Berklee College of Music's Valencia study abroad campus, 
@@ -259,7 +263,7 @@ export default function AboutPage() {
             understanding of how technology in the modern world has predominant influence
             on the way we create and consume audio.
           </p>
-          <p className="text-2xl font-handwriting leading-relaxed text-foreground/80">
+          <p className="text-2xl leading-relaxed text-foreground/80">
           
           </p>
 
@@ -310,15 +314,48 @@ export default function AboutPage() {
         </div>
       </div>
 
+      <section className="w-full max-w-6xl px-6 pb-32 pt-16 sm:px-10 lg:px-16 mt-12"></section>
+
       <section className="w-full max-w-6xl px-6 pb-32 pt-16 sm:px-10 lg:px-16">
         <div ref={calPolyRef} id="cal-poly" className="max-w-xl scroll-mt-36">
           <h2 className="mb-4 font-sans text-4xl font-semibold text-foreground">
             Cal Poly
           </h2>
-          <p className="text-2xl font-handwriting leading-relaxed text-foreground/80">
+          <p className="text-2xl leading-relaxed text-foreground/80">
             Placeholder copy about Cal Poly &mdash; coursework, projects,
             the thesis, and how your CS background eventually pointed back
             toward audio. Replace with your actual narrative.
+          </p>
+          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+            enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+            in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+            nulla pariatur.
+          </p>
+          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa
+            qui officia deserunt mollit anim id est laborum. Sed ut
+            perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae
+            vitae dicta sunt explicabo.
+          </p>
+          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
+            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
+            aut fugit, sed quia consequuntur magni dolores eos qui ratione
+            voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem
+            ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia
+            non numquam eius modi tempora incidunt ut labore et dolore
+            magnam aliquam quaerat voluptatem.
+          </p>
+          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
+            Ut enim ad minima veniam, quis nostrum exercitationem ullam
+            corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
+            consequatur. Quis autem vel eum iure reprehenderit qui in ea
+            voluptate velit esse quam nihil molestiae consequatur, vel illum
+            qui dolorem eum fugiat quo voluptas nulla pariatur.
           </p>
         </div>
 
@@ -326,7 +363,7 @@ export default function AboutPage() {
           <h2 className="mb-4 font-sans text-4xl font-semibold text-foreground">
             What I&apos;m working on now
           </h2>
-          <p className="text-2xl font-handwriting leading-relaxed text-foreground/80">
+          <p className="text-2xl leading-relaxed text-foreground/80">
             Placeholder for current interests or ongoing projects &mdash;
             whatever you&apos;re building, learning, or exploring right
             now in audio technology.

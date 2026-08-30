@@ -11,6 +11,7 @@ import {
   type Variants,
 } from "motion/react";
 import AccentBlock from "@/components/AccentBlock";
+import { withBasePath } from "@/lib/basePath";
 
 const background = [
   {
@@ -235,7 +236,7 @@ export default function AboutPage() {
           >
             <div className="relative aspect-[4/3] w-full overflow-hidden bg-olive">
               <Image
-                src="/images/studio.jpg"
+                src={withBasePath("/images/studio.jpg")}
                 alt="Studio"
                 fill
                 className="object-cover object-center"
@@ -243,8 +244,6 @@ export default function AboutPage() {
             </div>
           </motion.div>
         </div>
-
-        <section className="w-full max-w-6xl px-6 pb-32 pt-16 sm:px-10 lg:px-16 mt-12"></section>
 
         {/* Berklee text */}
         <div ref={berkleeRef} id="berklee" className="mt-24 max-w-3xl scroll-mt-36">
@@ -285,7 +284,7 @@ export default function AboutPage() {
                 className="relative aspect-square w-[45%] flex-shrink-0 snap-start cursor-zoom-in overflow-hidden bg-olive transition-opacity hover:opacity-90 sm:w-[23%]"
               >
                 <Image
-                  src={photo.src}
+                  src={withBasePath(photo.src)}
                   alt={photo.alt}
                   fill
                   className="object-cover object-center"
@@ -313,8 +312,6 @@ export default function AboutPage() {
           </button>
         </div>
       </div>
-
-      <section className="w-full max-w-6xl px-6 pb-32 pt-16 sm:px-10 lg:px-16 mt-12"></section>
 
       <section className="w-full max-w-6xl px-6 pb-32 pt-16 sm:px-10 lg:px-16">
         <div ref={calPolyRef} id="cal-poly" className="max-w-xl scroll-mt-36">
@@ -393,7 +390,7 @@ export default function AboutPage() {
             >
               <div className="relative max-h-[75vh] w-auto max-w-[90vw]">
                 <Image
-                  src={berkleeGallery[activePhoto].src}
+                  src={withBasePath(berkleeGallery[activePhoto].src)}
                   alt={berkleeGallery[activePhoto].alt}
                   width={1600}
                   height={1600}

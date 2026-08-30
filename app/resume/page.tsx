@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion, type Variants } from "motion/react";
+import { withBasePath } from "@/lib/basePath";
 
 const container: Variants = {
   hidden: {},
@@ -75,7 +76,7 @@ export default function ResumePage() {
 
             <motion.div variants={item} className="mt-10">
               <a
-                href="/resume.pdf"
+                href={withBasePath("/resume.pdf")}
                 download
                 className="inline-block border-b border-resume-blue pb-1 text-sm font-medium uppercase tracking-[0.15em] text-resume-blue transition-opacity hover:opacity-60"
               >
@@ -101,7 +102,7 @@ export default function ResumePage() {
               </p>
 
               <a
-                href="/resume.pdf"
+                href={withBasePath("/resume.pdf")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground transition-colors hover:text-resume-blue"
@@ -112,7 +113,7 @@ export default function ResumePage() {
 
             <div className="group relative aspect-[8.5/11] w-full overflow-hidden rounded-xl border border-resume-blue/20 bg-white shadow-xl shadow-black/10 transition-transform duration-500 hover:-translate-y-1">
               <Image
-                src="/images/resume.png"
+                src={withBasePath("/images/resume.png")}
                 alt="Justin Yuen resume"
                 fill
                 priority
@@ -121,7 +122,7 @@ export default function ResumePage() {
               />
 
               <a
-                href="/resume.pdf"
+                href={withBasePath("/resume.pdf")}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Open resume PDF"

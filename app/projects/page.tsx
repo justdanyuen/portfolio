@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, type Variants} from "motion/react";
 import { withBasePath } from "@/lib/basePath";
 import Image from "next/image";
+import { FaGithub } from "react-icons/fa";
 
 const container: Variants = {
   hidden: {},
@@ -135,9 +136,29 @@ export default function ProjectsPage() {
           className="mx-auto mt-12 w-full max-w-5xl"
         >
           <div className="mb-4 flex items-center gap-3">
-            <span className="h-2 w-2 rounded-full bg-purple" />
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-purple">
+            {/* Main dot — static */}
+            <span className="h-2 w-2 shrink-0 rounded-full bg-purple" />
+
+            <p className="flex items-center text-xs font-medium uppercase tracking-[0.2em] text-purple">
               Master&apos;s Thesis Project
+
+              {/* Flashing separator dot */}
+              <motion.span
+                className="mx-2 inline-block text-xl leading-none"
+                animate={{
+                  opacity: [1, 0.15, 1],
+                  scale: [1, 1.5, 1],
+                }}
+                transition={{
+                  duration: 1.4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                •
+              </motion.span>
+
+              Active Development
             </p>
           </div>
 
@@ -153,6 +174,22 @@ export default function ProjectsPage() {
             , designed for use directly inside DAW applications including Logic Pro X,
             Pro Tools, Cubase, and Reaper. Exported via VST3, AU, and AAX formats.
           </p>
+
+          {/* Tech tags */}
+          <div className="mt-4 flex flex-wrap gap-2">
+            {tech.map((t) => (
+              <a
+                key={t.name}
+                href={t.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-md bg-purple px-3 py-1 text-xs font-medium text-white transition-opacity hover:opacity-75"
+              >
+                {t.name}
+              </a>
+            ))}
+          </div>
+
 
           <h3 className="mt-10 text-xs font-semibold uppercase tracking-[0.2em] text-purple">
             Motivation
@@ -228,22 +265,6 @@ export default function ProjectsPage() {
             as well as the overall context of the mix via panning choices and balance of the mix.
           </p>
 
-          
-          {/* Tech tags */}
-          <div className="mt-4 flex flex-wrap gap-2">
-            {tech.map((t) => (
-              <a
-                key={t.name}
-                href={t.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-md bg-purple px-3 py-1 text-xs font-medium text-white transition-opacity hover:opacity-75"
-              >
-                {t.name}
-              </a>
-            ))}
-          </div>
-
           {/* Thesis paper */}
           <a
             href={withBasePath("/SV2ThesisPaper.pdf")}
@@ -263,6 +284,24 @@ export default function ProjectsPage() {
             <span className="text-2xl transition-transform duration-200 group-hover:translate-x-1">
               ↗
             </span>
+          </a>
+
+          <p className="mt-3 max-w-3xl text-base italic leading-relaxed text-foreground/80">
+            Official downloads for AAX, VST3, and AU are not yet available 
+            as I continue to refine the UI and feature set ahead of the project’s 
+            official release. In the meantime, feel free to explore the GitHub 
+            repository for a closer look at the project’s architecture, implementation, 
+            and ongoing development.
+          </p>
+
+          <a
+            href="https://github.com/justdanyuen/SV2"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex items-center gap-2 border-b border-purple pb-1 text-sm font-medium transition-opacity hover:opacity-60"
+          >
+            <FaGithub className="text-lg" />
+            View Source on GitHub ↗
           </a>
 
           {/* Project images */}

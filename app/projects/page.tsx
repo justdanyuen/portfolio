@@ -1,6 +1,8 @@
 "use client";
 
 import { motion, type Variants } from "motion/react";
+import { withBasePath } from "@/lib/basePath";
+import Image from "next/image";
 
 const container: Variants = {
   hidden: {},
@@ -92,39 +94,62 @@ export default function ProjectsPage() {
 
         {/* Image placeholders */}
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {[1, 2].map((n) => (
+          {[
+            ["surroundfield.png", "SV2 surround field visualization"],
+            ["frequency_spectrum.png", "SV2 frequency spectrum visualization"],
+            ["routing.png", "SV2 routing setup"],
+            ["solo_elements.png", "SV2 solo elements view"],
+          ].map(([src, alt]) => (
             <div
-              key={n}
-              className="flex aspect-video items-center justify-center rounded-xl border-2 border-dashed border-purple/40 bg-purple-light/10"
+              key={src}
+              className="relative aspect-video overflow-hidden rounded-xl"
             >
-              <p className="text-sm font-medium text-purple/70">
-                Plugin screenshot {n}
-              </p>
+              <Image
+                src={withBasePath(`/images/SV2/${src}`)}
+                alt={alt}
+                fill
+                className="object-cover object-center"
+              />
             </div>
           ))}
         </div>
 
+        {/* Project pitch */}
+        <div className="mt-8">
+          <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-purple">
+            Project Pitch
+          </p>
+
+          <video
+            controls
+            preload="metadata"
+            className="aspect-video w-full rounded-xl object-cover"
+          >
+            <source
+              src={withBasePath("/videos/SV2_pitch_web.mp4")}
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
         {/* Demo reel */}
-        <div className="mt-6">
+        <div className="mt-8">
           <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-purple">
             Demo Reel
           </p>
-          <div className="flex aspect-video w-full items-center justify-center rounded-xl border-2 border-dashed border-purple/40 bg-purple-light/10">
-            <div className="text-center">
-              <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-purple">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="white"
-                  className="ml-0.5 h-5 w-5"
-                >
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </div>
-              <p className="text-sm font-medium text-purple/70">
-                Demo reel coming soon
-              </p>
-            </div>
-          </div>
+
+          <video
+            controls
+            preload="metadata"
+            className="aspect-video w-full rounded-xl object-cover"
+          >
+            <source
+              src={withBasePath("/videos/SV2_demo_web.mp4")}
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
         </div>
 
         <a

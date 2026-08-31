@@ -39,3 +39,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+public/videos/SV2_demo.mp4
+public/videos/SV2_pitch.mp4

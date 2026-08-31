@@ -264,7 +264,7 @@ export default function AboutPage() {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
             className="hidden flex-col gap-4 lg:flex"
           >
-            <div className="relative aspect-[4/3] w-full overflow-hidden bg-olive">
+            <div className="relative aspect-[4/3] w-full overflow-hidden">
               <Image
                 src={withBasePath("/images/studio.jpg")}
                 alt="Studio"
@@ -314,7 +314,7 @@ export default function AboutPage() {
                 key={photo.alt}
                 type="button"
                 onClick={() => setActivePhoto(index)}
-                className="relative aspect-square w-[45%] flex-shrink-0 snap-start cursor-zoom-in overflow-hidden bg-olive transition-opacity hover:opacity-90 sm:w-[23%]"
+                className="relative aspect-square w-[45%] flex-shrink-0 snap-start cursor-zoom-in overflow-hidden transition-opacity hover:opacity-90 sm:w-[23%]"
               >
                 <Image
                   src={withBasePath(photo.src)}

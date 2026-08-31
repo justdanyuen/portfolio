@@ -172,7 +172,7 @@ export default function ProjectsPage() {
                 Thesis Documentation
               </p>
               <p className="mt-1 font-sans text-lg font-medium">
-                SV2 Thesis Reflection Paper
+                SV2 Thesis Paper
               </p>
             </div>
 

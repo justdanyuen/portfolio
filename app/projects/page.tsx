@@ -81,10 +81,24 @@ export default function ProjectsPage() {
             Stemming from my passion for a cappella — the composition of music
             centered around the human voice without external instruments,
             particularly in choir and collegiate groups — I wanted to create a
-            new way to understand what is happening within a vocal mix. Through
-            my education at Berklee Valencia, I developed foundational skills in
-            signal flow, audio processing, and surround sound mixing in Dolby
-            Atmos.
+            new way to understand what is happening within a vocal mix.  Various
+            details of a group's performance - overall member composition and 
+            voice characteristics, dynamics, blend, and timbre - can blur  the
+            ability to discern individual elements during the mixing process. 
+            I wanted to create a plugin that would provide visual feedback of the
+            placement and balance of vocal elements in a mix, allowing users to
+            better decide of stylistic choices and make adjustments to the mix.
+            </p>
+            
+          <p className="mt-3 max-w-3xl text-base leading-relaxed text-foreground/80">
+            Through my education at Berklee Valencia, I developed foundational knowledge 
+            in signal flow, audio processing, and surround sound mixing in Dolby
+            Atmos, which gave me the inspiration to create a plugin that 
+            visualizes the spatial distribution of elements in a mix. Leveraging 
+            my experience in C++ and the JUCE framework, I built a plugin that
+            provides real-time visual feedback of the frequency spectrum and 
+            spatial positioning of vocal elements, allowing users to see how 
+            their mix is distributed across the surround field.
           </p>
 
           {/* Tech tags */}

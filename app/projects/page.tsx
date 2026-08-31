@@ -102,6 +102,27 @@ export default function ProjectsPage() {
             ))}
           </div>
 
+          {/* Thesis paper */}
+          <a
+            href={withBasePath("/SV2ThesisPaper.pdf")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group mt-14 flex max-w-3xl items-center justify-between border-t border-purple/30 py-5 transition-opacity hover:opacity-60"
+          >
+            <div>
+              <p className="text-xs uppercase tracking-[0.2em] text-purple">
+                Thesis Documentation
+              </p>
+              <p className="mt-1 font-sans text-lg font-medium">
+                Surround Vocal Spectrum Visualizer — Master&apos;s Thesis
+              </p>
+            </div>
+
+            <span className="text-2xl transition-transform duration-200 group-hover:translate-x-1">
+              ↗
+            </span>
+          </a>
+
           {/* Project images */}
           <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2">
             {[
@@ -160,26 +181,6 @@ export default function ProjectsPage() {
             </div>
           </div>
 
-          {/* Thesis paper */}
-          <a
-            href={withBasePath("/SV2ThesisPaper.pdf")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group mt-14 flex max-w-3xl items-center justify-between border-t border-purple/30 py-5 transition-opacity hover:opacity-60"
-          >
-            <div>
-              <p className="text-xs uppercase tracking-[0.2em] text-purple">
-                Thesis Documentation
-              </p>
-              <p className="mt-1 font-sans text-lg font-medium">
-                SV2 Thesis Paper
-              </p>
-            </div>
-
-            <span className="text-2xl transition-transform duration-200 group-hover:translate-x-1">
-              ↗
-            </span>
-          </a>
         </motion.div>
       </motion.section>
     </div>

@@ -15,16 +15,16 @@ import { withBasePath } from "@/lib/basePath";
 
 const background = [
   {
-    title: "Berklee College of Music",
-    subtitle: " M.M. Music Production, Technology, and Innovation | August 2025 - July 2026",
-    accent: "#B23B3B",
-    anchor: "#berklee",
-  },
-  {
     title: "Cal Poly",
     subtitle: "B.S. Computer Science | September 2021 - June 2025",
     accent: "#4A7C4E",
     anchor: "#cal-poly",
+  },
+  {
+    title: "Berklee College of Music",
+    subtitle: " M.M. Music Production, Technology, and Innovation | August 2025 - July 2026",
+    accent: "#B23B3B",
+    anchor: "#berklee",
   },
   {
     title: "What I'm working on now",
@@ -74,8 +74,8 @@ export default function AboutPage() {
   const workRef = useRef<HTMLDivElement>(null);
   const [activePhoto, setActivePhoto] = useState<number | null>(null);
   const [sectionFractions, setSectionFractions] = useState({
-    berklee: 0.25,
-    calPoly: 0.65,
+    berklee: 0.65,
+    calPoly: 0.25,
     work: 0.85,
   });
 
@@ -84,7 +84,7 @@ export default function AboutPage() {
     offset: ["start start", "end end"],
   });
 
-  // Measure where the Berklee and Cal Poly sections actually sit
+  // Measure where the Cal Poly and Berklee sections actually sit
   // as a fraction of total scrollable height, so the color band
   // lines up with the real anchors instead of a flat page-wide guess.
   useLayoutEffect(() => {
@@ -125,21 +125,21 @@ export default function AboutPage() {
     return () => window.removeEventListener("resize", measure);
   }, []);
 
-  // Neutral at top -> red once Berklee section is reached -> green once Cal Poly is reached
+  // Neutral at top -> green once Cal Poly section is reached -> red once Berklee is reached
   const bandColor = useTransform(
   scrollYProgress,
   [
     0,
-    Math.max(sectionFractions.berklee - 0.2, 0.01),
-    sectionFractions.berklee,
-    Math.max(
-      sectionFractions.calPoly - 0.2,
-      sectionFractions.berklee + 0.1
-    ),
+    Math.max(sectionFractions.calPoly - 0.2, 0.01),
     sectionFractions.calPoly,
     Math.max(
+      sectionFractions.berklee - 0.2,
+      sectionFractions.calPoly + 0.1
+    ),
+    sectionFractions.berklee,
+    Math.max(
       sectionFractions.work - 0.15,
-      sectionFractions.calPoly + 0.05
+      sectionFractions.berklee + 0.05
     ),
     sectionFractions.work,
     1,
@@ -147,10 +147,10 @@ export default function AboutPage() {
   [
     BASE_COLOR,
     BASE_COLOR,
-    BERKLEE_COLOR,
-    BERKLEE_COLOR,
     CAL_POLY_COLOR,
     CAL_POLY_COLOR,
+    BERKLEE_COLOR,
+    BERKLEE_COLOR,
     WORK_COLOR,
     WORK_COLOR,
   ]
@@ -241,7 +241,9 @@ export default function AboutPage() {
               className="mt-8 max-w-2xl text-2xl leading-relaxed text-foreground/80"
             >
               I&apos;m a software engineer with a focus on audio technology.
-              My interest in sound started in the studio, and it&apos;s
+              My interest in sound started in learning about microphones and
+              live sound equipment during my time in my collegiate acappella 
+              group, and eventually into the recording studio where it&apos;s
               carried through into how I approach building software today
               &mdash; thinking about signal, latency, and the small details
               that make audio tools feel right to use.
@@ -251,10 +253,9 @@ export default function AboutPage() {
               variants={item}
               className="mt-4 max-w-2xl text-2xl leading-relaxed text-foreground/80"
             >
-              Outside of coursework and projects, I spend time exploring the
-              intersection of music production and real-time software
-              &mdash; the kind of tools that sit between a musician&apos;s
-              idea and the sound coming out of the speakers.
+              Outside of my interests in software development and music production,
+              I enjoy running, creating vocal arrangements of songs for different 
+              groups, and exploring new foods!
             </motion.p>
           </motion.div>
 
@@ -275,8 +276,55 @@ export default function AboutPage() {
           </motion.div>
         </div>
 
+        {/* Cal Poly text */}
+        <div ref={calPolyRef} id="cal-poly" className="mt-24 max-w-3xl scroll-mt-36">
+          <h2 className="mb-4 font-sans text-4xl font-semibold text-foreground">
+            Cal Poly
+          </h2>
+          <h3 className="mb-4 font-sans text-lg font-semibold text-foreground">
+            San Luis Obispo, California
+          </h3>
+          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+            enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+            in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+            nulla pariatur.
+          </p>
+          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
+            A large part of my college experience was spent with my time
+            in Take It SLO, Cal Poly's premier acappella group. Coming into
+            college, I was a huge fan of the acappella scene popularized by
+            groups like Pentatonix and movies like Pitch Perfect. However,
+            it was super daunting as a freshman with no prior group singing
+            experience to audition for a group that had been around for decades.
+            It turned out to be one of the best decisions I made in college,
+            as I met some of my closest lifelong friends, learned how to 
+            arrange and produce music, and performed across the central coast
+            and Los Angeles at various events throughout the years.
+          </p>
+          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
+            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
+            aut fugit, sed quia consequuntur magni dolores eos qui ratione
+            voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem
+            ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia
+            non numquam eius modi tempora incidunt ut labore et dolore
+            magnam aliquam quaerat voluptatem.
+          </p>
+          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
+            Ut enim ad minima veniam, quis nostrum exercitationem ullam
+            corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
+            consequatur. Quis autem vel eum iure reprehenderit qui in ea
+            voluptate velit esse quam nihil molestiae consequatur, vel illum
+            qui dolorem eum fugiat quo voluptas nulla pariatur.
+          </p>
+        </div>
+      </section>
+
+      <section className="w-full px-6 pb-32 pt-16 sm:px-10 lg:px-16">
         {/* Berklee text */}
-        <div ref={berkleeRef} id="berklee" className="mt-24 max-w-3xl scroll-mt-36">
+        <div ref={berkleeRef} id="berklee" className="max-w-3xl scroll-mt-36">
           <h2 className="mb-4 font-sans text-4xl font-semibold text-foreground">
             Berklee
           </h2>
@@ -347,63 +395,13 @@ export default function AboutPage() {
       </div>
 
       <section className="w-full max-w-6xl px-6 pb-32 pt-16 sm:px-10 lg:px-16">
-        <div ref={calPolyRef} id="cal-poly" className="max-w-xl scroll-mt-36">
-          <h2 className="mb-4 font-sans text-4xl font-semibold text-foreground">
-            Cal Poly
-          </h2>
-          <h3 className="mb-4 font-sans text-lg font-semibold text-foreground">
-            San Luis Obispo, California
-          </h3>
-          <p className="text-2xl leading-relaxed text-foreground/80">
-            Placeholder copy about Cal Poly &mdash; coursework, projects,
-            the thesis, and how your CS background eventually pointed back
-            toward audio. Replace with your actual narrative.
-          </p>
-          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-            enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-            in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-            nulla pariatur.
-          </p>
-          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa
-            qui officia deserunt mollit anim id est laborum. Sed ut
-            perspiciatis unde omnis iste natus error sit voluptatem
-            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-            quae ab illo inventore veritatis et quasi architecto beatae
-            vitae dicta sunt explicabo.
-          </p>
-          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
-            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-            aut fugit, sed quia consequuntur magni dolores eos qui ratione
-            voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem
-            ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia
-            non numquam eius modi tempora incidunt ut labore et dolore
-            magnam aliquam quaerat voluptatem.
-          </p>
-          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
-            Ut enim ad minima veniam, quis nostrum exercitationem ullam
-            corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
-            consequatur. Quis autem vel eum iure reprehenderit qui in ea
-            voluptate velit esse quam nihil molestiae consequatur, vel illum
-            qui dolorem eum fugiat quo voluptas nulla pariatur.
-          </p>
-        </div>
-
         <div
           ref={workRef}
           id="work"
-          className="mt-32 max-w-xl scroll-mt-36"
+          className="max-w-xl scroll-mt-36"
         >          <h2 className="mb-4 font-sans text-4xl font-semibold text-foreground">
             What I&apos;m working on now
           </h2>
-          <p className="text-2xl leading-relaxed text-foreground/80">
-            Placeholder for current interests or ongoing projects &mdash;
-            whatever you&apos;re building, learning, or exploring right
-            now in audio technology.
-          </p>
 
           <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do

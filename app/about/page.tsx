@@ -276,6 +276,29 @@ export default function AboutPage() {
           </motion.div>
         </div>
 
+        <div className="h-8" />
+
+        <div className="max-w-3xl">
+          <h2 className="font-sans text-2xl font-semibold text-foreground">
+            Currently listening
+          </h2>
+
+          <p className="mt-3 text-xl leading-relaxed text-foreground/80">
+            A collection of songs I've been listening to, check out
+            some of tunes that have been inspiring me recently!
+          </p>
+
+          <a
+            href="https://open.spotify.com/playlist/2h6NmrVarPILPwIyfVE1GR?si=f15ed16774b9472e"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex items-center gap-2 text-lg font-medium text-foreground underline decoration-2 underline-offset-4 transition-opacity hover:opacity-60"
+          >
+            Listen on Spotify
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
         {/* Cal Poly text */}
         <div ref={calPolyRef} id="cal-poly" className="mt-24 max-w-3xl scroll-mt-36">
           <h2 className="mb-4 font-sans text-4xl font-semibold text-foreground">

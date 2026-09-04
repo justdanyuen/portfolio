@@ -39,7 +39,7 @@ export default function Nav() {
           />
         </Link>
         <div className="text-2xl flex items-center gap-6 font-medium [text-shadow:0_1px_3px_rgba(0,0,0,0.35)]">
-          <Link className="transition-all duration-200 hover:scale-110 hover:opacity-60"href="/">HOME</Link>
+        {/* <Link className="transition-all duration-200 hover:scale-110 hover:opacity-60"href="/">HOME</Link> */}
         <Link className="transition-all duration-200 hover:scale-110 hover:opacity-60"href="/about">ABOUT</Link>
         <Link className="transition-all duration-200 hover:scale-110 hover:opacity-60"href="/projects">PROJECTS</Link>
         <Link className="transition-all duration-200 hover:scale-110 hover:opacity-60"href="/resume">RESUME</Link>

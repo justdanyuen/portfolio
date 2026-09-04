@@ -61,7 +61,8 @@ const item: Variants = {
 };
 
 // Neutral base color shown before reaching either section
-const BASE_COLOR = "#E0C468";
+// const BASE_COLOR = "#E0C468";
+const BASE_COLOR = "#B5B1A8";
 const BERKLEE_COLOR = "#B23B3B";
 const CAL_POLY_COLOR = "#4A7C4E";
 const WORK_COLOR = "#4C6F8C";

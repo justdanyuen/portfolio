@@ -16,7 +16,7 @@ import Link from "next/link";
 
 const background = [
   {
-    title: "Cal Poly",
+    title: "California Polytechnic State University, San Luis Obispo",
     subtitle: "B.S. Computer Science | September 2021 - June 2025",
     accent: "#4A7C4E",
     anchor: "#cal-poly",
@@ -357,13 +357,13 @@ export default function AboutPage() {
         </div>
 
         {/* Cal Poly text */}
-        <div ref={calPolyRef} id="cal-poly" className="mt-15 max-w-3xl scroll-mt-36">
-          <h2 className="mb-4 font-sans text-4xl font-semibold text-foreground">
-            Cal Poly
+        <div ref={calPolyRef} id="cal-poly" className="mt-24 max-w-3xl scroll-mt-36">
+          <h2 className="mb-4 font-sans text-4xl font-semibold text-foreground whitespace-nowrap">
+              California Polytechnic State University, San Luis Obispo
           </h2>
-          <h3 className="mb-4 font-sans text-lg font-semibold text-foreground">
+          {/* <h3 className="mb-4 font-sans text-lg font-semibold text-foreground">
             San Luis Obispo, California
-          </h3>
+          </h3> */}
           <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -403,7 +403,7 @@ export default function AboutPage() {
       </section>
 
       {/* Cal Poly gallery */}
-      <div className="relative left-1/2 right-1/2 -mx-[50vw] mt-6 w-screen px-6 sm:px-10 lg:px-16">
+<div className="relative left-1/2 right-1/2 -mx-[50vw] -mt-12 w-screen px-6 sm:px-10 lg:px-16">
         <div className="group/carousel relative">
           <div
             className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
@@ -432,15 +432,15 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <section className="w-full px-6 pb-32 pt-16 sm:px-10 lg:px-16">
+      <section className="w-full px-6 pb-32 pt-16 mt-24 sm:px-10 lg:px-16">
         {/* Berklee text */}
         <div ref={berkleeRef} id="berklee" className="max-w-3xl scroll-mt-36">
-          <h2 className="mb-4 font-sans text-4xl font-semibold text-foreground">
-            Berklee
+          <h2 className="mb-4 font-sans text-4xl font-semibold text-foreground whitespace-nowrap">
+              Berklee Valencia - Berklee College of Music 
           </h2>
-          <h3 className="mb-4 font-sans text-lg font-semibold text-foreground">
+          {/* <h3 className="mb-4 font-sans text-lg font-semibold text-foreground">
             Valencia, Spain 
-          </h3>
+          </h3> */}
           <p className="text-2xl leading-relaxed text-foreground/80">
             In August 2025, I moved across the world from Northern California to Valencia,
             Spain to pursue a master's degree in Music Production, Technology, and Innovation. 
@@ -461,7 +461,7 @@ export default function AboutPage() {
       </section>
 
       {/* Full-bleed gallery carousel, breaking out of the page's max-width for larger photos */}
-      <div className="relative left-1/2 right-1/2 -mx-[50vw] mt-6 w-screen px-6 sm:px-10 lg:px-16">
+      <div className="relative left-1/2 right-1/2 -mx-[50vw] -mt-12 w-screen px-6 sm:px-10 lg:px-16">
         <div className="group/carousel relative">
           <div
             ref={carouselRef}
@@ -509,7 +509,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <section className="w-full max-w-6xl px-6 pb-32 pt-16 sm:px-10 lg:px-16">
+      <section className="w-full mt-24 max-w-6xl px-6 pb-32 pt-16 sm:px-10 lg:px-16">
         <div
           ref={workRef}
           id="work"

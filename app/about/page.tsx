@@ -63,6 +63,7 @@ const calpolyGallery = [
   {
     src: "/images/cal poly/throw.jpg",
     alt: "Throw",
+    caption: "Upwards and onwards!",
     width: 3456,
     height: 5184,
   },
@@ -477,7 +478,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Cal Poly gallery
+      {/* Cal Poly gallery */}
       <div className="relative left-1/2 right-1/2 -mx-[50vw] -mt-12 w-screen px-6 sm:px-10 lg:px-16">
         <div className="group/carousel relative">
           <div
@@ -505,12 +506,12 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
-      </div> */}
-
-      {/* Cal Poly gallery */}
-      <div className="relative left-1/2 right-1/2 -mx-[50vw] -mt-12 w-screen px-6 sm:px-10 lg:px-16">
-        <PhotoCarousel photos={calpolyGallery} />
       </div>
+
+      {/* Photo Carousel Cal Poly */}
+      {/* <div className="relative left-1/2 right-1/2 -mx-[50vw] -mt-12 w-screen px-6 sm:px-10 lg:px-16">
+        <PhotoCarousel photos={calpolyGallery} />
+      </div> */}
 
       <section className="w-full px-6 pb-32 pt-16 mt-24 sm:px-10 lg:px-16">
         {/* Berklee text */}
@@ -541,7 +542,7 @@ export default function AboutPage() {
       </section>
 
       {/* Full-bleed gallery carousel, breaking out of the page's max-width for larger photos */}
-      {/* <div className="relative left-1/2 right-1/2 -mx-[50vw] -mt-12 w-screen px-6 sm:px-10 lg:px-16">
+      <div className="relative left-1/2 right-1/2 -mx-[50vw] -mt-12 w-screen px-6 sm:px-10 lg:px-16">
         <div className="group/carousel relative">
           <div
             ref={carouselRef}
@@ -586,11 +587,12 @@ export default function AboutPage() {
             &#8250;
           </button>
         </div>
-      </div> */}
-
-      <div className="relative left-1/2 right-1/2 -mx-[50vw] -mt-12 w-screen px-6 sm:px-10 lg:px-16">
-        <PhotoCarousel photos={berkleeGallery} />
       </div>
+
+      {/* Photo Carousel Berklee */}
+      {/* <div className="relative left-1/2 right-1/2 -mx-[50vw] -mt-12 w-screen px-6 sm:px-10 lg:px-16">
+        <PhotoCarousel photos={berkleeGallery} />
+      </div> */}
 
       <section className="w-full mt-24 max-w-6xl px-6 pb-32 pt-16 sm:px-10 lg:px-16">
         <div

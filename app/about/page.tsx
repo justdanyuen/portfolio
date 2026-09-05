@@ -12,6 +12,7 @@ import {
 } from "motion/react";
 import AccentBlock from "@/components/AccentBlock";
 import { withBasePath } from "@/lib/basePath";
+import Link from "next/link";
 
 const background = [
   {
@@ -35,9 +36,35 @@ const background = [
 
 ];
 
+
+const calpolyGallery = [
+  { src: "/images/cal poly/grad-headshot.jpg", alt: "Cal Poly graduation headshot", caption: "B.S. in Computer Science, Minor in Music from Cal Poly, San Luis Obispo, California"},
+  { src: "/images/cal poly/morro-rock.jpg", alt: "Morro Rock", caption: "One of my favorite film photos I tooklocated in Morro Bay, California. A popular landmark along the central coast."},
+  { src: "/images/cal poly/salud.jpg", alt: "Salud", caption: "Celebrations sponsored by Modelo :)"},
+  { src: "/images/cal poly/throw.jpg", alt: "Throw"},
+  { src: "/images/cal poly/valencia-apartments.jpg", alt: "Valencia apartments", caption: "Precursors to the year fo a lifetime!"},
+]
+
 const berkleeGallery = [
-  { src: "/images/berklee/family.jpg", alt: "Berklee graduation", caption: "Greetings from Valencia, Spain!" },
-  { src: "/images/berklee/pro-tools.jpg", alt: "Working in Pro Tools", caption: "Developing SV2 surround audio-visualizer plugin via C++/JUCE and Pro Tools." },
+  { src: "/images/berklee/family.jpg", alt: "Berklee graduation", caption: "Greetings from Valencia, Spain" },
+  { src: "/images/berklee/city-of-arts.jpg", alt: "City of Arts and Sciences", caption: "The City of Arts and Sciences, a cultural and architectural complex in Valencia, Spain. This is where the Berklee Valencia campus is located!" },
+  { src: "/images/berklee/pro-tools.jpg",
+    alt: "Working in Pro Tools",
+    caption: (
+      <>
+        Developing SV2 surround audio-visualizer plugin via C++/JUCE and Pro Tools.
+        See the{" "}
+        <Link
+          href="/projects"
+          className="underline underline-offset-2 hover:opacity-70 transition-opacity"
+        >
+          Projects
+        </Link>{" "}
+        tab for more details.
+      </>
+    ),
+  },
+  { src: "/images/berklee/paella.jpg", alt: "Homemade paella", caption:"Homemade paella with chicken, rabbit, and garrofó beans - after all, Valencia is the birth-place of the beloved spanish dish!"},
   { src: "/images/berklee/acappella.jpg", alt: "A cappella group", caption: "Post-performance pic with Viva Voce, acappella group at Berklee Valencia I founded in 2025." },
   { src: "/images/berklee/ceremony.jpg", alt: "Official ceremony pic", caption: "Master's in Music Production, Technology, and Innovation" },
   { src: "/images/berklee/mpti.jpg", alt: "MPTI event", caption: "Berklee Valencia MPTI Class of '26" },
@@ -73,7 +100,12 @@ export default function AboutPage() {
   const berkleeRef = useRef<HTMLDivElement>(null);
   const calPolyRef = useRef<HTMLDivElement>(null);
   const workRef = useRef<HTMLDivElement>(null);
-  const [activePhoto, setActivePhoto] = useState<number | null>(null);
+  const [activePhoto, setActivePhoto] = useState<{
+    gallery: "calpoly" | "berklee";
+    index: number;
+  } | null>(null);  
+  const activeGallery =
+  activePhoto?.gallery === "calpoly" ? calpolyGallery : berkleeGallery;
   const [sectionFractions, setSectionFractions] = useState({
     berklee: 0.65,
     calPoly: 0.25,
@@ -172,14 +204,28 @@ export default function AboutPage() {
   const showPrev = useCallback(() => {
     setActivePhoto((current) => {
       if (current === null) return current;
-      return (current - 1 + berkleeGallery.length) % berkleeGallery.length;
+
+      const gallery =
+        current.gallery === "calpoly" ? calpolyGallery : berkleeGallery;
+
+      return {
+        ...current,
+        index: (current.index - 1 + gallery.length) % gallery.length,
+      };
     });
   }, []);
 
   const showNext = useCallback(() => {
     setActivePhoto((current) => {
       if (current === null) return current;
-      return (current + 1) % berkleeGallery.length;
+
+      const gallery =
+        current.gallery === "calpoly" ? calpolyGallery : berkleeGallery;
+
+      return {
+        ...current,
+        index: (current.index + 1) % gallery.length,
+      };
     });
   }, []);
 
@@ -215,39 +261,26 @@ export default function AboutPage() {
               ABOUT
             </motion.h1>
 
-            {/* Background links moved to the top */}
-            <motion.div variants={item} className="mt-6">
-              <h2 className="mb-4 font-sans text-lg font-semibold text-foreground">
-                Background
-              </h2>
-              <div>
-                {background.map((entry) => (
-                  <a
-                    key={entry.title}
-                    href={entry.anchor}
-                    className="block transition-opacity hover:opacity-70"
-                  >
-                    <AccentBlock
-                      color={entry.accent}
-                      title={entry.title}
-                      subtitle={entry.subtitle}
-                    />
-                  </a>
-                ))}
-              </div>
-            </motion.div>
+            <motion.p
+              variants={item}
+              className="mt-8 max-w-2xl text-2xl leading-relaxed text-foreground/80"
+            >
+              Hello and welcome to my page—thanks for stopping by!
+
+            </motion.p>
 
             <motion.p
               variants={item}
               className="mt-8 max-w-2xl text-2xl leading-relaxed text-foreground/80"
             >
-              I&apos;m a software engineer with a focus on audio technology.
-              My interest in sound started in learning about microphones and
-              live sound equipment during my time in my collegiate acappella 
-              group, and eventually into the recording studio where it&apos;s
-              carried through into how I approach building software today
-              &mdash; thinking about signal, latency, and the small details
-              that make audio tools feel right to use.
+              My interest in sound began at a young age when I fell in love with 
+              singing. That curiosity grew during my time in collegiate a cappella, 
+              where I became fascinated with microphones, live sound, and the 
+              technology behind a performance and capturing the moment in the studio. 
+              Eventually, that interest led me into the recording studio and 
+              continues to shape how I approach building software today—thinking 
+              about signal, latency, and the small details that make audio tools feel 
+              right to use.
             </motion.p>
 
             <motion.p
@@ -256,7 +289,8 @@ export default function AboutPage() {
             >
               Outside of my interests in software development and music production,
               I enjoy running, creating vocal arrangements of songs for different 
-              groups, and exploring new foods!
+              groups, and exploring new foods. I'm always looking for any recommendations
+              for some good bites!
             </motion.p>
           </motion.div>
 
@@ -277,6 +311,28 @@ export default function AboutPage() {
           </motion.div>
         </div>
 
+        {/* Background links moved to the top */}
+            <motion.div variants={item} className="mt-6">
+              <h2 className="mb-4 font-sans text-2xl font-semibold text-foreground">
+                Background
+              </h2>
+              <div>
+                {background.map((entry) => (
+                  <a
+                    key={entry.title}
+                    href={entry.anchor}
+                    className="block transition-opacity hover:opacity-70"
+                  >
+                    <AccentBlock
+                      color={entry.accent}
+                      title={entry.title}
+                      subtitle={entry.subtitle}
+                    />
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+
         <div className="h-8" />
 
         <div className="max-w-3xl">
@@ -286,7 +342,7 @@ export default function AboutPage() {
 
           <p className="mt-3 text-xl leading-relaxed text-foreground/80">
             A collection of songs I've been listening to, check out
-            some of tunes that have been inspiring me recently!
+            some of tunes that have been inspiring me recently :)
           </p>
 
           <a
@@ -301,7 +357,7 @@ export default function AboutPage() {
         </div>
 
         {/* Cal Poly text */}
-        <div ref={calPolyRef} id="cal-poly" className="mt-24 max-w-3xl scroll-mt-36">
+        <div ref={calPolyRef} id="cal-poly" className="mt-15 max-w-3xl scroll-mt-36">
           <h2 className="mb-4 font-sans text-4xl font-semibold text-foreground">
             Cal Poly
           </h2>
@@ -346,6 +402,36 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Cal Poly gallery */}
+      <div className="relative left-1/2 right-1/2 -mx-[50vw] mt-6 w-screen px-6 sm:px-10 lg:px-16">
+        <div className="group/carousel relative">
+          <div
+            className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {calpolyGallery.map((photo, index) => (
+              <button
+                key={photo.alt}
+                type="button"
+                onClick={() =>
+                  setActivePhoto({
+                    gallery: "calpoly",
+                    index,
+                  })
+                }
+                className="relative aspect-square w-[45%] flex-shrink-0 snap-start cursor-zoom-in overflow-hidden transition-opacity hover:opacity-90 sm:w-[23%]"
+              >
+                <Image
+                  src={withBasePath(photo.src)}
+                  alt={photo.alt}
+                  fill
+                  className="object-cover object-center"
+                />
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <section className="w-full px-6 pb-32 pt-16 sm:px-10 lg:px-16">
         {/* Berklee text */}
         <div ref={berkleeRef} id="berklee" className="max-w-3xl scroll-mt-36">
@@ -385,7 +471,12 @@ export default function AboutPage() {
               <button
                 key={photo.alt}
                 type="button"
-                onClick={() => setActivePhoto(index)}
+                onClick={() =>
+                  setActivePhoto({
+                    gallery: "berklee",
+                    index,
+                  })
+                }                
                 className="relative aspect-square w-[45%] flex-shrink-0 snap-start cursor-zoom-in overflow-hidden transition-opacity hover:opacity-90 sm:w-[23%]"
               >
                 <Image
@@ -426,6 +517,10 @@ export default function AboutPage() {
         >          <h2 className="mb-4 font-sans text-4xl font-semibold text-foreground">
             What I&apos;m working on now
           </h2>
+
+          <h3 className="mb-4 font-sans text-lg font-semibold text-foreground">
+            San Francisco Bay Area, California
+          </h3>
 
           <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
@@ -473,7 +568,7 @@ export default function AboutPage() {
             onClick={() => setActivePhoto(null)}
           >
             <motion.div
-              key={activePhoto}
+              key={`${activePhoto.gallery}-${activePhoto.index}`}
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.96 }}
@@ -483,16 +578,18 @@ export default function AboutPage() {
             >
               <div className="relative max-h-[75vh] w-auto max-w-[90vw]">
                 <Image
-                  src={withBasePath(berkleeGallery[activePhoto].src)}
-                  alt={berkleeGallery[activePhoto].alt}
+                  src={withBasePath(activeGallery[activePhoto.index].src)}
+                  alt={activeGallery[activePhoto.index].alt}
                   width={1600}
                   height={1600}
                   className="max-h-[75vh] w-auto max-w-[90vw] object-contain"
                 />
               </div>
-              <p className="mt-4 text-center text-sm text-white/80">
-                {berkleeGallery[activePhoto].caption}
-              </p>
+              {activeGallery[activePhoto.index].caption && (
+                <p className="mt-4 text-center text-sm text-white/80">
+                  {activeGallery[activePhoto.index].caption}
+                </p>
+              )}
             </motion.div>
 
             {/* Prev / next controls */}

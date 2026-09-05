@@ -41,7 +41,9 @@ export default function HeroText() {
         variants={item}
         className="text-6xl leading-none sm:text-7xl lg:text-8xl font-sans font-semibold"
       >
-        Hi, I&apos;m <span className="font-handwriting font-normal">Justin</span>
+        Hi, I&apos;m Justin
+        {/* <span className="font-handwriting font-normal"> */}
+          {/* </span> */}
       </motion.h1>
 
       <motion.p

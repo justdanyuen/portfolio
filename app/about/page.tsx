@@ -39,7 +39,7 @@ const background = [
 
 const calpolyGallery = [
   { src: "/images/cal poly/grad-headshot.jpg", alt: "Cal Poly graduation headshot", caption: "B.S. in Computer Science, Minor in Music from Cal Poly, San Luis Obispo, California"},
-  { src: "/images/cal poly/morro-rock.jpg", alt: "Morro Rock", caption: "One of my favorite film photos I tooklocated in Morro Bay, California. A popular landmark along the central coast."},
+  { src: "/images/cal poly/morro-rock.jpg", alt: "Morro Rock", caption: "One of my favorite film photos I took located in Morro Bay, California. A popular landmark along the central coast."},
   { src: "/images/cal poly/salud.jpg", alt: "Salud", caption: "Celebrations sponsored by Modelo :)"},
   { src: "/images/cal poly/throw.jpg", alt: "Throw"},
   { src: "/images/cal poly/valencia-apartments.jpg", alt: "Valencia apartments", caption: "Precursors to the year fo a lifetime!"},
@@ -276,7 +276,7 @@ export default function AboutPage() {
               My interest in sound began at a young age when I fell in love with 
               singing. That curiosity grew during my time in collegiate a cappella, 
               where I became fascinated with microphones, live sound, and the 
-              technology behind a performance and capturing the moment in the studio. 
+              technology behind a performance and capturing the moment.
               Eventually, that interest led me into the recording studio and 
               continues to shape how I approach building software today—thinking 
               about signal, latency, and the small details that make audio tools feel 

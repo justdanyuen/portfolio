@@ -13,6 +13,7 @@ import {
 import AccentBlock from "@/components/AccentBlock";
 import { withBasePath } from "@/lib/basePath";
 import Link from "next/link";
+import PhotoCarousel from "@/components/PhotoCarousel";
 
 const background = [
   {
@@ -38,18 +39,62 @@ const background = [
 
 
 const calpolyGallery = [
-  { src: "/images/cal poly/grad-headshot.jpg", alt: "Cal Poly graduation headshot", caption: "B.S. in Computer Science, Minor in Music from Cal Poly, San Luis Obispo, California"},
-  { src: "/images/cal poly/morro-rock.jpg", alt: "Morro Rock", caption: "One of my favorite film photos I took located in Morro Bay, California. A popular landmark along the central coast."},
-  { src: "/images/cal poly/salud.jpg", alt: "Salud", caption: "Celebrations sponsored by Modelo :)"},
-  { src: "/images/cal poly/throw.jpg", alt: "Throw"},
-  { src: "/images/cal poly/valencia-apartments.jpg", alt: "Valencia apartments", caption: "Precursors to the year fo a lifetime!"},
-]
+  {
+    src: "/images/cal poly/grad-headshot.jpg",
+    alt: "Cal Poly graduation headshot",
+    caption: "B.S. in Computer Science, Minor in Music from Cal Poly, San Luis Obispo, California",
+    width: 3367,
+    height: 5051,
+  },
+  {
+    src: "/images/cal poly/morro-rock.jpg",
+    alt: "Morro Rock",
+    caption: "One of my favorite film photos I took located in Morro Bay, California. A popular landmark along the central coast.",
+    width: 3130,
+    height: 2075,
+  },
+  {
+    src: "/images/cal poly/salud.jpg",
+    alt: "Salud",
+    caption: "Celebrations sponsored by Modelo :)",
+    width: 5058,
+    height: 3372,
+  },
+  {
+    src: "/images/cal poly/throw.jpg",
+    alt: "Throw",
+    width: 3456,
+    height: 5184,
+  },
+  {
+    src: "/images/cal poly/valencia-apartment.jpg", // fixed filename to match disk
+    alt: "Valencia apartments",
+    caption: "Precursors to the year fo a lifetime!",
+    width: 5184,
+    height: 3456,
+  },
+];
 
 const berkleeGallery = [
-  { src: "/images/berklee/family.jpg", alt: "Berklee graduation", caption: "Greetings from Valencia, Spain" },
-  { src: "/images/berklee/city-of-arts.jpg", alt: "City of Arts and Sciences", caption: "The City of Arts and Sciences, a cultural and architectural complex in Valencia, Spain. This is where the Berklee Valencia campus is located!" },
-  { src: "/images/berklee/pro-tools.jpg",
+  {
+    src: "/images/berklee/family.jpg",
+    alt: "Berklee graduation",
+    caption: "Greetings from Valencia, Spain",
+    width: 2304,
+    height: 1536,
+  },
+  {
+    src: "/images/berklee/city-of-arts.jpg",
+    alt: "City of Arts and Sciences",
+    caption: "The City of Arts and Sciences, a cultural and architectural complex in Valencia, Spain. This is where the Berklee Valencia campus is located!",
+    width: 1024,
+    height: 683,
+  },
+  {
+    src: "/images/berklee/pro-tools.jpg",
     alt: "Working in Pro Tools",
+    width: 3635,
+    height: 2433,
     caption: (
       <>
         Developing SV2 surround audio-visualizer plugin via C++/JUCE and Pro Tools.
@@ -64,11 +109,41 @@ const berkleeGallery = [
       </>
     ),
   },
-  { src: "/images/berklee/paella.jpg", alt: "Homemade paella", caption:"Homemade paella with chicken, rabbit, and garrofó beans - after all, Valencia is the birth-place of the beloved spanish dish!"},
-  { src: "/images/berklee/acappella.jpg", alt: "A cappella group", caption: "Post-performance pic with Viva Voce, acappella group at Berklee Valencia I founded in 2025." },
-  { src: "/images/berklee/ceremony.jpg", alt: "Official ceremony pic", caption: "Master's in Music Production, Technology, and Innovation" },
-  { src: "/images/berklee/mpti.jpg", alt: "MPTI event", caption: "Berklee Valencia MPTI Class of '26" },
-  { src: "/images/berklee/friends.jpg", alt: "Friends at Berklee", caption: "End of year paella party to celebrate a year of connection and creation with life-long friends" },
+  {
+    src: "/images/berklee/paella.jpg",
+    alt: "Homemade paella",
+    caption: "Homemade paella with chicken, rabbit, and garrofó beans - after all, Valencia is the birth-place of the beloved spanish dish!",
+    width: 3024,
+    height: 4032,
+  },
+  {
+    src: "/images/berklee/acappella.jpg",
+    alt: "A cappella group",
+    caption: "Post-performance pic with Viva Voce, acappella group at Berklee Valencia I founded in 2025.",
+    width: 3635,
+    height: 2435,
+  },
+  {
+    src: "/images/berklee/ceremony.jpg",
+    alt: "Official ceremony pic",
+    caption: "Master's in Music Production, Technology, and Innovation",
+    width: 1965,
+    height: 2953,
+  },
+  {
+    src: "/images/berklee/mpti.jpg",
+    alt: "MPTI event",
+    caption: "Berklee Valencia MPTI Class of '26",
+    width: 2953,
+    height: 1969,
+  },
+  {
+    src: "/images/berklee/friends.jpg",
+    alt: "Friends at Berklee",
+    caption: "End of year paella party to celebrate a year of connection and creation with life-long friends",
+    width: 3635,
+    height: 2433,
+  },
 ];
 
 const container: Variants = {
@@ -359,7 +434,7 @@ export default function AboutPage() {
         {/* Cal Poly text */}
         <div ref={calPolyRef} id="cal-poly" className="mt-24 max-w-3xl scroll-mt-36">
           <h2 className="mb-4 font-sans text-4xl font-semibold text-foreground whitespace-nowrap">
-              California Polytechnic State University, San Luis Obispo
+              Cal Poly San Luis Obispo
           </h2>
           {/* <h3 className="mb-4 font-sans text-lg font-semibold text-foreground">
             San Luis Obispo, California
@@ -402,8 +477,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Cal Poly gallery */}
-<div className="relative left-1/2 right-1/2 -mx-[50vw] -mt-12 w-screen px-6 sm:px-10 lg:px-16">
+      {/* Cal Poly gallery
+      <div className="relative left-1/2 right-1/2 -mx-[50vw] -mt-12 w-screen px-6 sm:px-10 lg:px-16">
         <div className="group/carousel relative">
           <div
             className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
@@ -430,6 +505,11 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
+      </div> */}
+
+      {/* Cal Poly gallery */}
+      <div className="relative left-1/2 right-1/2 -mx-[50vw] -mt-12 w-screen px-6 sm:px-10 lg:px-16">
+        <PhotoCarousel photos={calpolyGallery} />
       </div>
 
       <section className="w-full px-6 pb-32 pt-16 mt-24 sm:px-10 lg:px-16">
@@ -461,7 +541,7 @@ export default function AboutPage() {
       </section>
 
       {/* Full-bleed gallery carousel, breaking out of the page's max-width for larger photos */}
-      <div className="relative left-1/2 right-1/2 -mx-[50vw] -mt-12 w-screen px-6 sm:px-10 lg:px-16">
+      {/* <div className="relative left-1/2 right-1/2 -mx-[50vw] -mt-12 w-screen px-6 sm:px-10 lg:px-16">
         <div className="group/carousel relative">
           <div
             ref={carouselRef}
@@ -489,7 +569,6 @@ export default function AboutPage() {
             ))}
           </div>
 
-          {/* Carousel nav buttons */}
           <button
             type="button"
             onClick={() => scrollCarousel("left")}
@@ -507,6 +586,10 @@ export default function AboutPage() {
             &#8250;
           </button>
         </div>
+      </div> */}
+
+      <div className="relative left-1/2 right-1/2 -mx-[50vw] -mt-12 w-screen px-6 sm:px-10 lg:px-16">
+        <PhotoCarousel photos={berkleeGallery} />
       </div>
 
       <section className="w-full mt-24 max-w-6xl px-6 pb-32 pt-16 sm:px-10 lg:px-16">

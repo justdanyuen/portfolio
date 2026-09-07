@@ -18,7 +18,7 @@ import PhotoCarousel from "@/components/PhotoCarousel";
 const background = [
   {
     title: "California Polytechnic State University, San Luis Obispo",
-    subtitle: "B.S. Computer Science | September 2021 - June 2025",
+    subtitle: "B.S. Computer Science & Minor in Music | September 2021 - June 2025",
     accent: "#4A7C4E",
     anchor: "#cal-poly",
   },
@@ -376,7 +376,7 @@ export default function AboutPage() {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
             className="hidden flex-col gap-4 lg:flex"
           >
-            <div className="relative aspect-[4/3] w-full overflow-hidden">
+            <div className="relative aspect-[3/4] w-full overflow-hidden">
               <Image
                 src={withBasePath("/images/studio.webp")}
                 alt="Studio"

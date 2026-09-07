@@ -191,11 +191,11 @@ export default function ProjectsPage() {
           </div>
 
 
-          <h3 className="mt-10 text-xs font-semibold uppercase tracking-[0.2em] text-purple">
+          {/* <h3 className="mt-10 text-lg font-semibold uppercase tracking-[0.2em] text-purple">
             Motivation
-          </h3>
+          </h3> */}
 
-          <p className="mt-3 max-w-3xl text-base leading-relaxed text-foreground/80">
+          <p className="mt-3 max-w-3xl text-xl leading-relaxed text-foreground/80">
             Stemming from my passion for <strong>a cappella </strong>— the composition of music
             centered around the human voice without external instruments,
             particularly in choir and collegiate groups — I wanted to create a
@@ -209,10 +209,10 @@ export default function ProjectsPage() {
             </p>
             
 
-          <h3 className="mt-10 text-xs font-semibold uppercase tracking-[0.2em] text-purple">
+          <h3 className="mt-10 text-lg font-semibold uppercase tracking-[0.2em] text-purple">
             Development
           </h3>  
-          <p className="mt-3 max-w-3xl text-base leading-relaxed text-foreground/80">
+          <p className="mt-3 max-w-3xl text-xl leading-relaxed text-foreground/80">
             Through my education at Berklee Valencia, I developed foundational knowledge 
             in signal flow, audio processing, and surround sound mixing in Dolby
             Atmos, which gave me the inspiration to create a plugin that 
@@ -223,7 +223,7 @@ export default function ProjectsPage() {
             allowing users to see how their mix is distributed across the surround field. 
           </p>
 
-          <p className="mt-3 max-w-3xl text-base leading-relaxed text-foreground/80">
+          <p className="mt-3 max-w-3xl text-xl leading-relaxed text-foreground/80">
             The plugin uses different information parameters for the separate 
             window monitoring to depict locational information in the surround 
             space relative to the listener and the frequency spectrum of the 
@@ -240,7 +240,7 @@ export default function ProjectsPage() {
             mainly used in the Bass vocal group.
           </p>
 
-          <p className="mt-3 max-w-3xl text-base leading-relaxed text-foreground/80">
+          <p className="mt-3 max-w-3xl text-xl leading-relaxed text-foreground/80">
             For the <strong>frequency spectrum visualization</strong>, the plugin 
             uses a Fast Fourier Transform (FFT) to analyze the audio signal and
             display the frequency content of the signal in real-time. The plugin
@@ -254,7 +254,7 @@ export default function ProjectsPage() {
             issue in acappella arrangements for clarity.
           </p>
           
-          <p className="mt-3 max-w-3xl text-base leading-relaxed text-foreground/80">
+          <p className="mt-3 max-w-3xl text-xl leading-relaxed text-foreground/80">
             Aside from the core default functionalty of the plugin, I also implemented 
             a few additional features to enhance the user experience. Both windows of 
             the plugin include a <strong>solo</strong> feature that allows users to 
@@ -286,7 +286,7 @@ export default function ProjectsPage() {
             </span>
           </a>
 
-          <p className="mt-3 max-w-3xl text-base italic leading-relaxed text-foreground/80">
+          <p className="mt-3 max-w-3xl text-md italic leading-relaxed text-foreground/80">
             Official downloads for AAX, VST3, and AU are not yet available 
             as I continue to refine the UI and feature set ahead of the project’s 
             official release. In the meantime, feel free to explore the GitHub 

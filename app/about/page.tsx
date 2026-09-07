@@ -40,35 +40,35 @@ const background = [
 
 const calpolyGallery = [
   {
-    src: "/images/cal poly/grad-headshot.jpg",
+    src: "/images/cal-poly/grad-headshot.webp",
     alt: "Cal Poly graduation headshot",
     caption: "B.S. in Computer Science, Minor in Music from Cal Poly, San Luis Obispo, California",
     width: 3367,
     height: 5051,
   },
   {
-    src: "/images/cal poly/morro-rock.jpg",
+    src: "/images/cal-poly/morro-rock.webp",
     alt: "Morro Rock",
     caption: "One of my favorite film photos I took located in Morro Bay, California. A popular landmark along the central coast.",
     width: 3130,
     height: 2075,
   },
   {
-    src: "/images/cal poly/salud.jpg",
+    src: "/images/cal-poly/salud.webp",
     alt: "Salud",
     caption: "Celebrations sponsored by Modelo :)",
     width: 5058,
     height: 3372,
   },
   {
-    src: "/images/cal poly/throw.jpg",
+    src: "/images/cal-poly/throw.webp",
     alt: "Throw",
     caption: "Upwards and onwards!",
     width: 3456,
     height: 5184,
   },
   {
-    src: "/images/cal poly/valencia-apartment.jpg", // fixed filename to match disk
+    src: "/images/cal-poly/valencia-apartment.webp", // fixed filename to match disk
     alt: "Valencia apartments",
     caption: "Precursors to the year fo a lifetime!",
     width: 5184,
@@ -78,21 +78,21 @@ const calpolyGallery = [
 
 const berkleeGallery = [
   {
-    src: "/images/berklee/family.jpg",
+    src: "/images/berklee/family.webp",
     alt: "Berklee graduation",
     caption: "Greetings from Valencia, Spain",
     width: 2304,
     height: 1536,
   },
   {
-    src: "/images/berklee/city-of-arts.jpg",
+    src: "/images/berklee/city-of-arts.webp",
     alt: "City of Arts and Sciences",
     caption: "The City of Arts and Sciences, a cultural and architectural complex in Valencia, Spain. This is where the Berklee Valencia campus is located!",
     width: 1024,
     height: 683,
   },
   {
-    src: "/images/berklee/pro-tools.jpg",
+    src: "/images/berklee/pro-tools.webp",
     alt: "Working in Pro Tools",
     width: 3635,
     height: 2433,
@@ -111,35 +111,35 @@ const berkleeGallery = [
     ),
   },
   {
-    src: "/images/berklee/paella.jpg",
+    src: "/images/berklee/paella.webp",
     alt: "Homemade paella",
     caption: "Homemade paella with chicken, rabbit, and garrofó beans - after all, Valencia is the birth-place of the beloved spanish dish!",
     width: 3024,
     height: 4032,
   },
   {
-    src: "/images/berklee/acappella.jpg",
+    src: "/images/berklee/acappella.webp",
     alt: "A cappella group",
     caption: "Post-performance pic with Viva Voce, acappella group at Berklee Valencia I founded in 2025.",
     width: 3635,
     height: 2435,
   },
   {
-    src: "/images/berklee/ceremony.jpg",
+    src: "/images/berklee/ceremony.webp",
     alt: "Official ceremony pic",
     caption: "Master's in Music Production, Technology, and Innovation",
     width: 1965,
     height: 2953,
   },
   {
-    src: "/images/berklee/mpti.jpg",
+    src: "/images/berklee/mpti.webp",
     alt: "MPTI event",
     caption: "Berklee Valencia MPTI Class of '26",
     width: 2953,
     height: 1969,
   },
   {
-    src: "/images/berklee/friends.jpg",
+    src: "/images/berklee/friends.webp",
     alt: "Friends at Berklee",
     caption: "End of year paella party to celebrate a year of connection and creation with life-long friends",
     width: 3635,
@@ -378,7 +378,7 @@ export default function AboutPage() {
           >
             <div className="relative aspect-[4/3] w-full overflow-hidden">
               <Image
-                src={withBasePath("/images/studio.jpg")}
+                src={withBasePath("/images/studio.webp")}
                 alt="Studio"
                 fill
                 className="object-cover object-center"

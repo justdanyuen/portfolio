@@ -38,25 +38,25 @@ const tech = [
 
 const projectImages = [
   {
-    src: "/images/SV2/surroundfield.png",
+    src: "/images/SV2/surroundfield.webp",
     alt: "SV2 surround field visualization",
     caption:
       "The spatial visualization window displays the placement and relative level of vocal groups throughout a 5.1 surround field.",
   },
   {
-    src: "/images/SV2/frequency_spectrum.png",
+    src: "/images/SV2/frequency_spectrum.webp",
     alt: "SV2 frequency spectrum visualization",
     caption:
       "Real-time frequency analysis provides visual feedback for identifying spectral overlap and masking between vocal groups.",
   },
   {
-    src: "/images/SV2/solo_elements.png",
+    src: "/images/SV2/solo_elements.webp",
     alt: "SV2 solo elements view",
     caption:
       "Individual vocal elements can be isolated to examine their spatial position, level, and spectral characteristics in greater detail.",
   },
     {
-    src: "/images/SV2/routing.png",
+    src: "/images/SV2/routing.webp",
     alt: "SV2 routing setup",
     caption:
       "SV2 is inserted across grouped vocal buses inside the DAW, allowing each section of the arrangement to be monitored independently.",

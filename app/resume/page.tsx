@@ -113,7 +113,7 @@ export default function ResumePage() {
 
             <div className="group relative aspect-[8.5/11] w-full overflow-hidden rounded-xl border border-resume-blue/20 bg-white shadow-xl shadow-black/10 transition-transform duration-500 hover:-translate-y-1">
               <Image
-                src={withBasePath("/images/resume.png")}
+                src={withBasePath("/images/resume.webp")}
                 alt="Justin Yuen resume"
                 fill
                 priority

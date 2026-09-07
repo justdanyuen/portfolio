@@ -31,7 +31,7 @@ export default function Nav() {
           className="ml-7 scale-[1.6] transition-transform duration-200 hover:scale-[1.75] drop-shadow-[0_1px_3px_rgba(0,0,0,0.35)]"
         >
           <Image
-            src={withBasePath("/images/icons/ink/favicon-512.png")}
+            src={withBasePath("/images/icons/ink/favicon-512.webp")}
             alt="Justin Yuen"
             width={50}
             height={50}

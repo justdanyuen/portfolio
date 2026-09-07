@@ -441,13 +441,26 @@ export default function AboutPage() {
             San Luis Obispo, California
           </h3> */}
           <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-            enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-            in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-            nulla pariatur.
+            Growing up in a time when technology was becoming increasingly 
+            woven into everyday life, I was drawn to understanding how complex 
+            systems work and how they can be built to solve real problems. 
+            At Cal Poly, I had the opportunity to explore computer science 
+            from several different angles, from data structures and algorithms 
+            and their role in building efficient, scalable software, to computer 
+            architecture and RISC-V assembly, where I learned how software interacts 
+            with hardware at a lower level.
           </p>
+
+          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
+            Some of my favorite courses focused on database systems and 
+            design. In one class, my team used SQL and Python to build a 
+            responsive shop system that managed inventory, changing weekly 
+            product demand, and customer interactions. I especially enjoyed
+            thinking through how information should be structured, stored, 
+            and retrieved efficiently.
+          
+          </p>
+
           <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
             A large part of my college experience was spent with my time
             in Take It SLO, Cal Poly's premier acappella group. Coming into
@@ -459,21 +472,6 @@ export default function AboutPage() {
             as I met some of my closest lifelong friends, learned how to 
             arrange and produce music, and performed across the central coast
             and Los Angeles at various events throughout the years.
-          </p>
-          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
-            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-            aut fugit, sed quia consequuntur magni dolores eos qui ratione
-            voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem
-            ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia
-            non numquam eius modi tempora incidunt ut labore et dolore
-            magnam aliquam quaerat voluptatem.
-          </p>
-          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
-            Ut enim ad minima veniam, quis nostrum exercitationem ullam
-            corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
-            consequatur. Quis autem vel eum iure reprehenderit qui in ea
-            voluptate velit esse quam nihil molestiae consequatur, vel illum
-            qui dolorem eum fugiat quo voluptas nulla pariatur.
           </p>
         </div>
       </section>
@@ -608,35 +606,17 @@ export default function AboutPage() {
           </h3>
 
           <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-            enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-            in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-            nulla pariatur.
-          </p>
-          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa
-            qui officia deserunt mollit anim id est laborum. Sed ut
-            perspiciatis unde omnis iste natus error sit voluptatem
-            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-            quae ab illo inventore veritatis et quasi architecto beatae
-            vitae dicta sunt explicabo.
-          </p>
-          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
-            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-            aut fugit, sed quia consequuntur magni dolores eos qui ratione
-            voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem
-            ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia
-            non numquam eius modi tempora incidunt ut labore et dolore
-            magnam aliquam quaerat voluptatem.
-          </p>
-          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
-            Ut enim ad minima veniam, quis nostrum exercitationem ullam
-            corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
-            consequatur. Quis autem vel eum iure reprehenderit qui in ea
-            voluptate velit esse quam nihil molestiae consequatur, vel illum
-            qui dolorem eum fugiat quo voluptas nulla pariatur.
+            Since completing my Master's and moving back from Spain, I've 
+            been working on a few different projects, including refinement 
+            of my thesis project in anticipation for release, mixing and 
+            production for various artists, and exploring new ideas for 
+            software development in the audio scene. I've recently joined 
+            membership under the Audio Engineering Society, and look forward
+            to connecting with other audio professionals and enthusiasts in 
+            the field. On the side, I love creating vocal-arrangements in my 
+            free time and keeping in-touch with my creative side. Feel free to
+            reach out to me if you'd like to chat about audio or software,
+            I'd love to connect!
           </p>
         </div>
       </section>

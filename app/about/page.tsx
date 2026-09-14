@@ -440,7 +440,7 @@ export default function AboutPage() {
           {/* <h3 className="mb-4 font-sans text-lg font-semibold text-foreground">
             San Luis Obispo, California
           </h3> */}
-          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
+          <p className="mt-8 max-w-2xl text-lg sm:text-xl lg:text-2xl leading-relaxed text-foreground/80">
             Growing up in a time when technology was becoming increasingly 
             woven into everyday life, I was drawn to understanding how complex 
             systems work and how they can be built to solve real problems. 
@@ -451,7 +451,7 @@ export default function AboutPage() {
             with hardware at a lower level.
           </p>
 
-          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
+          <p className="mt-8 max-w-2xl text-lg sm:text-xl lg:text-2xl leading-relaxed text-foreground/80">
             Some of my favorite courses focused on database systems and 
             design. In one class, my team used SQL and Python to build a 
             responsive shop system that managed inventory, changing weekly 
@@ -461,7 +461,7 @@ export default function AboutPage() {
           
           </p>
 
-          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
+          <p className="mt-8 max-w-2xl text-lg sm:text-xl lg:text-2xl leading-relaxed text-foreground/80">
             A large part of my college experience was spent with my time
             in Take It SLO, Cal Poly's premier acappella group. Coming into
             college, I was a huge fan of the acappella scene popularized by
@@ -514,13 +514,13 @@ export default function AboutPage() {
       <section className="w-full px-6 pb-32 pt-16 mt-24 sm:px-10 lg:px-16">
         {/* Berklee text */}
         <div ref={berkleeRef} id="berklee" className="max-w-3xl scroll-mt-36">
-          <h2 className="mb-4 font-sans text-4xl font-semibold text-foreground whitespace-nowrap">
+          <h2 className="mb-4 font-sans text-2xl sm:text-3xl lg:text-4xl font-semibold text-foreground">
               Berklee Valencia - Berklee College of Music 
           </h2>
           {/* <h3 className="mb-4 font-sans text-lg font-semibold text-foreground">
             Valencia, Spain 
           </h3> */}
-          <p className="text-2xl leading-relaxed text-foreground/80">
+          <p className="mt-8 max-w-2xl text-lg sm:text-xl lg:text-2xl leading-relaxed text-foreground/80">
             In August 2025, I moved across the world from Northern California to Valencia,
             Spain to pursue a master's degree in Music Production, Technology, and Innovation. 
             I spent a year at Berklee College of Music's Valencia study abroad campus, 
@@ -605,7 +605,7 @@ export default function AboutPage() {
             San Francisco Bay Area, California
           </h3>
 
-          <p className="mt-4 text-2xl leading-relaxed text-foreground/80">
+          <p className="mt-8 max-w-2xl text-lg sm:text-xl lg:text-2xl leading-relaxed text-foreground/80">
             Since completing my Master's and moving back from Spain, I've 
             been working on a few different projects, including refinement 
             of my thesis project in anticipation for release, mixing and 

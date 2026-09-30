@@ -1,7 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { motion, type Variants } from "motion/react";
+import { motion, AnimatePresence, type Variants } from "motion/react";
 import { withBasePath } from "@/lib/basePath";
 
 const container: Variants = {
@@ -31,15 +32,37 @@ const skills = [
   { name: "MAX/MSP", url: "https://cycling74.com/products/max/" },
 ];
 
-
 export default function ResumePage() {
+  const [viewerOpen, setViewerOpen] = useState(false);
+
+  // Close on Escape, and lock background scrolling while the viewer is open
+  useEffect(() => {
+    if (!viewerOpen) return;
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setViewerOpen(false);
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [viewerOpen]);
+
   return (
-    <div className="relative">
+    // overflow-x-clip (not hidden) prevents the slide-in animation from
+    // widening the page on mobile without breaking lg:sticky below
+    <div className="relative overflow-x-clip">
       {/* Steel blue gradient band, same intensity/shape as the Projects purple band */}
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[700px] bg-gradient-to-b from-resume-blue via-resume-blue/40 to-transparent opacity-80" />
 
-        <section className="w-full px-6 pb-24 pt-36 sm:px-10 lg:px-16">
-          <div className="grid max-w-[1400px] grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 xl:grid-cols-[0.7fr_1.3fr] xl:gap-20 lg:items-start">          
+      {/* Below lg: one screen tall, preview fills the leftover space. lg+: original layout */}
+      <section className="flex min-h-svh w-full flex-col px-6 pb-24 pt-20 sm:px-10 lg:block lg:min-h-0 lg:px-16 lg:pt-36">
+        <div className="flex max-w-[1400px] flex-1 flex-col gap-6 lg:grid lg:grid-cols-[0.8fr_1.2fr] lg:items-start lg:gap-16 xl:grid-cols-[0.7fr_1.3fr] xl:gap-20">
           {/* Left column */}
           <motion.div
             variants={container}
@@ -54,8 +77,8 @@ export default function ResumePage() {
               RESUME
             </motion.h1>
 
-            <motion.div variants={item} className="mt-8">
-              <h2 className="mb-3 font-sans text-2xl font-semibold text-foreground">
+            <motion.div variants={item} className="mt-4 lg:mt-8">
+              <h2 className="mb-2 font-sans text-xl font-semibold text-foreground lg:mb-3 lg:text-2xl">
                 Skills
               </h2>
 
@@ -74,7 +97,7 @@ export default function ResumePage() {
               </div>
             </motion.div>
 
-            <motion.div variants={item} className="mt-10">
+            <motion.div variants={item} className="mt-5 lg:mt-10">
               <a
                 href={withBasePath("/resume.pdf")}
                 download
@@ -94,9 +117,9 @@ export default function ResumePage() {
               ease: [0.16, 1, 0.3, 1],
               delay: 0.2,
             }}
-            className="w-full max-w-[720px] justify-self-start"
+            className="flex w-full max-w-[720px] flex-1 flex-col justify-self-start lg:block"
           >
-            <div className="mb-4 flex items-center justify-between">
+            <div className="mb-3 flex items-center justify-between lg:mb-4">
               <p className="text-xs font-medium uppercase tracking-[0.2em] text-resume-blue">
                 Preview
               </p>
@@ -111,27 +134,68 @@ export default function ResumePage() {
               </a>
             </div>
 
-            <div className="group relative aspect-[8.5/11] w-full overflow-hidden rounded-xl border border-resume-blue/20 bg-white shadow-xl shadow-black/10 transition-transform duration-500 hover:-translate-y-1">
+            {/* Below lg: full page scaled to fit the leftover height, shadow hugs the paper.
+                lg+: the original white card at a fixed 8.5x11 ratio. */}
+            <button
+              type="button"
+              onClick={() => setViewerOpen(true)}
+              aria-label="View resume full screen"
+              className="relative block min-h-[240px] w-full flex-1 cursor-zoom-in transition-transform duration-500 hover:-translate-y-1 lg:aspect-[8.5/11] lg:min-h-0 lg:flex-none lg:overflow-hidden lg:rounded-xl lg:border lg:border-resume-blue/20 lg:bg-white lg:shadow-xl lg:shadow-black/10"
+            >
               <Image
                 src={withBasePath("/images/resume.webp")}
                 alt="Justin Yuen resume"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 65vw"
-                className="object-contain"
+                className="object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.18)] lg:drop-shadow-none"
               />
-
-              <a
-                href={withBasePath("/resume.pdf")}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Open resume PDF"
-                className="absolute inset-0"
-              />
-            </div>
+            </button>
           </motion.div>
         </div>
       </section>
+
+      {/* Full-screen viewer: resume at full width, scrolls vertically */}
+      <AnimatePresence>
+        {viewerOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[100] overflow-y-auto bg-black/90"
+            onClick={() => setViewerOpen(false)}
+          >
+            <div className="flex min-h-full items-start justify-center px-4 py-16 sm:px-8">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.97 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.97 }}
+                transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full max-w-3xl"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Image
+                  src={withBasePath("/images/resume.webp")}
+                  alt="Justin Yuen resume"
+                  width={1700}
+                  height={2200}
+                  className="h-auto w-full rounded-md bg-white"
+                />
+              </motion.div>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setViewerOpen(false)}
+              aria-label="Close resume viewer"
+              className="fixed right-5 top-4 text-4xl text-white transition-opacity hover:opacity-60"
+            >
+              &times;
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

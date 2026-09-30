@@ -70,7 +70,7 @@ const calpolyGallery = [
   {
     src: "/images/cal-poly/valencia-apartment.webp", // fixed filename to match disk
     alt: "Valencia apartments",
-    caption: "Precursors to the year fo a lifetime!",
+    caption: "Precursors to the year of a lifetime!",
     width: 5184,
     height: 3456,
   },
@@ -197,14 +197,16 @@ export default function AboutPage() {
   // as a fraction of total scrollable height, so the color band
   // lines up with the real anchors instead of a flat page-wide guess.
   useLayoutEffect(() => {
-    const NAV_OFFSET = 144; // matches scroll-mt-36, confirmed via the actual anchor-jump landing position
-
     function measure() {
       const container = scrollRef.current;
       const berklee = berkleeRef.current;
       const calPoly = calPolyRef.current;
       const work = workRef.current;
       if (!container || !berklee || !calPoly || !work) return;
+
+      // Read the anchors' actual scroll-margin-top (scroll-mt-24 on mobile,
+      // scroll-mt-36 on lg) so the color band lines up at every breakpoint
+      const NAV_OFFSET = parseFloat(getComputedStyle(berklee).scrollMarginTop) || 0;
 
       const totalHeight = container.scrollHeight - window.innerHeight;
       if (totalHeight <= 0) return;
@@ -327,7 +329,7 @@ export default function AboutPage() {
         style={{ background: bandBackground }}
       />
 
-      <section className="w-full px-6 pb-32 pt-36 sm:px-10 lg:px-16">
+      <section className="w-full px-6 pb-20 pt-20 sm:px-10 lg:px-16 lg:pb-32 lg:pt-36">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.3fr_1fr] lg:items-start">
           <motion.div variants={container} initial="hidden" animate="show">
             <motion.h1
@@ -339,7 +341,7 @@ export default function AboutPage() {
 
             <motion.p
               variants={item}
-              className="mt-8 max-w-2xl text-2xl leading-relaxed text-foreground/80"
+              className="mt-5 max-w-2xl text-lg sm:text-xl lg:mt-8 lg:text-2xl leading-relaxed text-foreground/80"
             >
               Hello and welcome to my page—thanks for stopping by!
 
@@ -347,7 +349,7 @@ export default function AboutPage() {
 
             <motion.p
               variants={item}
-              className="mt-8 max-w-2xl text-2xl leading-relaxed text-foreground/80"
+              className="mt-5 max-w-2xl text-lg sm:text-xl lg:mt-8 lg:text-2xl leading-relaxed text-foreground/80"
             >
               My interest in sound began at a young age when I fell in love with 
               singing. That curiosity grew during my time in collegiate a cappella, 
@@ -361,7 +363,7 @@ export default function AboutPage() {
 
             <motion.p
               variants={item}
-              className="mt-4 max-w-2xl text-2xl leading-relaxed text-foreground/80"
+              className="mt-4 max-w-2xl text-lg sm:text-xl lg:text-2xl leading-relaxed text-foreground/80"
             >
               Outside of my interests in software development and music production,
               I enjoy running, creating vocal arrangements of songs for different 
@@ -416,7 +418,7 @@ export default function AboutPage() {
             Currently listening
           </h2>
 
-          <p className="mt-3 text-xl leading-relaxed text-foreground/80">
+          <p className="mt-3 text-lg sm:text-xl leading-relaxed text-foreground/80">
             A collection of songs I've been listening to, check out
             some of tunes that have been inspiring me recently :)
           </p>
@@ -433,14 +435,14 @@ export default function AboutPage() {
         </div>
 
         {/* Cal Poly text */}
-        <div ref={calPolyRef} id="cal-poly" className="mt-24 max-w-3xl scroll-mt-36">
-          <h2 className="mb-4 font-sans text-4xl font-semibold text-foreground whitespace-nowrap">
-              Cal Poly San Luis Obispo
+        <div ref={calPolyRef} id="cal-poly" className="mt-16 max-w-3xl scroll-mt-24 lg:mt-24 lg:scroll-mt-36">
+          <h2 className="mb-4 font-sans text-2xl sm:text-3xl lg:text-4xl font-semibold text-foreground">
+            Cal Poly San Luis Obispo
           </h2>
           {/* <h3 className="mb-4 font-sans text-lg font-semibold text-foreground">
             San Luis Obispo, California
           </h3> */}
-          <p className="mt-8 max-w-2xl text-lg sm:text-xl lg:text-2xl leading-relaxed text-foreground/80">
+          <p className="mt-5 max-w-2xl text-lg sm:text-xl lg:mt-8 lg:text-2xl leading-relaxed text-foreground/80">
             Growing up in a time when technology was becoming increasingly 
             woven into everyday life, I was drawn to understanding how complex 
             systems work and how they can be built to solve real problems. 
@@ -451,7 +453,7 @@ export default function AboutPage() {
             with hardware at a lower level.
           </p>
 
-          <p className="mt-8 max-w-2xl text-lg sm:text-xl lg:text-2xl leading-relaxed text-foreground/80">
+          <p className="mt-5 max-w-2xl text-lg sm:text-xl lg:mt-8 lg:text-2xl leading-relaxed text-foreground/80">
             Some of my favorite courses focused on database systems and 
             design. In one class, my team used SQL and Python to build a 
             responsive shop system that managed inventory, changing weekly 
@@ -461,7 +463,7 @@ export default function AboutPage() {
           
           </p>
 
-          <p className="mt-8 max-w-2xl text-lg sm:text-xl lg:text-2xl leading-relaxed text-foreground/80">
+          <p className="mt-5 max-w-2xl text-lg sm:text-xl lg:mt-8 lg:text-2xl leading-relaxed text-foreground/80">
             A large part of my college experience was spent with my time
             in Take It SLO, Cal Poly's premier acappella group. Coming into
             college, I was a huge fan of the acappella scene popularized by
@@ -477,7 +479,7 @@ export default function AboutPage() {
       </section>
 
       {/* Cal Poly gallery */}
-      <div className="relative left-1/2 right-1/2 -mx-[50vw] -mt-12 w-screen px-6 sm:px-10 lg:px-16">
+      <div className="-mt-12 px-6 sm:px-10 lg:px-16">
         <div className="group/carousel relative">
           <div
             className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
@@ -507,20 +509,20 @@ export default function AboutPage() {
       </div>
 
       {/* Photo Carousel Cal Poly */}
-      {/* <div className="relative left-1/2 right-1/2 -mx-[50vw] -mt-12 w-screen px-6 sm:px-10 lg:px-16">
+      {/* <div className="-mt-12 px-6 sm:px-10 lg:px-16">
         <PhotoCarousel photos={calpolyGallery} />
       </div> */}
 
-      <section className="w-full px-6 pb-32 pt-16 mt-24 sm:px-10 lg:px-16">
+      <section className="mt-12 w-full px-6 pb-20 pt-8 sm:px-10 lg:mt-24 lg:px-16 lg:pb-32 lg:pt-16">
         {/* Berklee text */}
-        <div ref={berkleeRef} id="berklee" className="max-w-3xl scroll-mt-36">
+        <div ref={berkleeRef} id="berklee" className="max-w-3xl scroll-mt-24 lg:scroll-mt-36">
           <h2 className="mb-4 font-sans text-2xl sm:text-3xl lg:text-4xl font-semibold text-foreground">
               Berklee Valencia - Berklee College of Music 
           </h2>
           {/* <h3 className="mb-4 font-sans text-lg font-semibold text-foreground">
             Valencia, Spain 
           </h3> */}
-          <p className="mt-8 max-w-2xl text-lg sm:text-xl lg:text-2xl leading-relaxed text-foreground/80">
+          <p className="mt-5 max-w-2xl text-lg sm:text-xl lg:mt-8 lg:text-2xl leading-relaxed text-foreground/80">
             In August 2025, I moved across the world from Northern California to Valencia,
             Spain to pursue a master's degree in Music Production, Technology, and Innovation. 
             I spent a year at Berklee College of Music's Valencia study abroad campus, 
@@ -528,19 +530,16 @@ export default function AboutPage() {
             signal flow, music production, and software development for audio applications. 
             What began as a year of uncertainty and exploration turned into a life-changing
             experience where I met lifelong friends, collaborated on music and software 
-            projects with artists and developers from around the world, and gaind a deeper 
+            projects with artists and developers from around the world, and gained a deeper 
             understanding of how technology in the modern world has predominant influence
             on the way we create and consume audio.
-          </p>
-          <p className="text-2xl leading-relaxed text-foreground/80">
-          
           </p>
 
         </div>
       </section>
 
-      {/* Full-bleed gallery carousel, breaking out of the page's max-width for larger photos */}
-      <div className="relative left-1/2 right-1/2 -mx-[50vw] -mt-12 w-screen px-6 sm:px-10 lg:px-16">
+      {/* Berklee gallery */}
+      <div className="-mt-12 px-6 sm:px-10 lg:px-16">
         <div className="group/carousel relative">
           <div
             ref={carouselRef}
@@ -588,16 +587,17 @@ export default function AboutPage() {
       </div>
 
       {/* Photo Carousel Berklee */}
-      {/* <div className="relative left-1/2 right-1/2 -mx-[50vw] -mt-12 w-screen px-6 sm:px-10 lg:px-16">
+      {/* <div className="-mt-12 px-6 sm:px-10 lg:px-16">
         <PhotoCarousel photos={berkleeGallery} />
       </div> */}
 
-      <section className="w-full mt-24 max-w-6xl px-6 pb-32 pt-16 sm:px-10 lg:px-16">
+      <section className="mt-12 w-full max-w-6xl px-6 pb-24 pt-8 sm:px-10 lg:mt-24 lg:px-16 lg:pb-32 lg:pt-16">
         <div
           ref={workRef}
           id="work"
-          className="max-w-xl scroll-mt-36"
-        >          <h2 className="mb-4 font-sans text-4xl font-semibold text-foreground">
+          className="max-w-xl scroll-mt-24 lg:scroll-mt-36"
+        >
+          <h2 className="mb-4 font-sans text-2xl sm:text-3xl lg:text-4xl font-semibold text-foreground">
             What I&apos;m working on now
           </h2>
 
@@ -605,7 +605,7 @@ export default function AboutPage() {
             San Francisco Bay Area, California
           </h3>
 
-          <p className="mt-8 max-w-2xl text-lg sm:text-xl lg:text-2xl leading-relaxed text-foreground/80">
+          <p className="mt-5 max-w-2xl text-lg sm:text-xl lg:mt-8 lg:text-2xl leading-relaxed text-foreground/80">
             Since completing my Master's and moving back from Spain, I've 
             been working on a few different projects, including refinement 
             of my thesis project in anticipation for release, mixing and 

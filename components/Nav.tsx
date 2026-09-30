@@ -5,6 +5,9 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import { withBasePath } from "@/lib/basePath";
 
+const linkClass =
+  "transition-all duration-200 hover:scale-110 hover:opacity-60";
+
 export default function Nav() {
   return (
     <motion.nav
@@ -25,24 +28,25 @@ export default function Nav() {
       />
 
       {/* Actual nav content -- sits above the blur layer, never fades */}
-      <div className="relative flex items-center justify-between p-6">
+      <div className="relative flex items-center justify-between gap-4 p-4 md:p-6">
         <Link
           href="/"
-          className="ml-7 scale-[1.6] transition-transform duration-200 hover:scale-[1.75] drop-shadow-[0_1px_3px_rgba(0,0,0,0.35)]"
+          className="shrink-0 md:ml-3 transition-transform duration-200 hover:scale-105 drop-shadow-[0_1px_3px_rgba(0,0,0,0.35)]"
         >
           <Image
             src={withBasePath("/images/icons/ink/favicon-512.webp")}
             alt="Justin Yuen"
-            width={50}
-            height={50}
+            width={80}
+            height={80}
             priority
+            className="h-auto w-10 md:w-20"
           />
         </Link>
-        <div className="text-2xl flex items-center gap-6 font-medium [text-shadow:0_1px_3px_rgba(0,0,0,0.35)]">
-        {/* <Link className="transition-all duration-200 hover:scale-110 hover:opacity-60"href="/">HOME</Link> */}
-        <Link className="transition-all duration-200 hover:scale-110 hover:opacity-60"href="/about">ABOUT</Link>
-        <Link className="transition-all duration-200 hover:scale-110 hover:opacity-60"href="/projects">PROJECTS</Link>
-        <Link className="transition-all duration-200 hover:scale-110 hover:opacity-60"href="/resume">RESUME</Link>
+        <div className="flex items-center gap-4 md:gap-6 text-base sm:text-lg md:text-2xl font-medium [text-shadow:0_1px_3px_rgba(0,0,0,0.35)]">
+          {/* <Link className={linkClass} href="/">HOME</Link> */}
+          <Link className={linkClass} href="/about">ABOUT</Link>
+          <Link className={linkClass} href="/projects">PROJECTS</Link>
+          <Link className={linkClass} href="/resume">RESUME</Link>
         </div>
       </div>
     </motion.nav>

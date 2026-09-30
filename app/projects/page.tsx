@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence, type Variants} from "motion/react";
+import { motion, AnimatePresence, type Variants } from "motion/react";
 import { withBasePath } from "@/lib/basePath";
 import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
@@ -55,13 +55,17 @@ const projectImages = [
     caption:
       "Individual vocal elements can be isolated to examine their spatial position, level, and spectral characteristics in greater detail.",
   },
-    {
+  {
     src: "/images/SV2/routing.webp",
     alt: "SV2 routing setup",
     caption:
       "SV2 is inserted across grouped vocal buses inside the DAW, allowing each section of the arrangement to be monitored independently.",
   },
 ];
+
+// Shared body-paragraph style: smaller on mobile, original text-xl from sm up
+const bodyText =
+  "mt-3 max-w-3xl text-lg leading-relaxed text-foreground/80 sm:text-xl";
 
 export default function ProjectsPage() {
   const [activeImage, setActiveImage] = useState<number | null>(null);
@@ -70,10 +74,7 @@ export default function ProjectsPage() {
     setActiveImage((current) => {
       if (current === null) return current;
 
-      return (
-        (current - 1 + projectImages.length) %
-        projectImages.length
-      );
+      return (current - 1 + projectImages.length) % projectImages.length;
     });
   }, []);
 
@@ -110,7 +111,6 @@ export default function ProjectsPage() {
     };
   }, [activeImage, showPrev, showNext]);
 
-  
   return (
     <div className="relative">
       {/* Purple gradient band, fading down into the page background */}
@@ -121,7 +121,7 @@ export default function ProjectsPage() {
         variants={container}
         initial="hidden"
         animate="show"
-        className="w-full px-6 pb-20 pt-36 sm:px-10 lg:px-16"
+        className="w-full px-6 pb-24 pt-20 sm:px-10 lg:px-16 lg:pt-36"
       >
         <motion.h1
           variants={item}
@@ -133,14 +133,16 @@ export default function ProjectsPage() {
         {/* Featured project */}
         <motion.div
           variants={item}
-          className="mx-auto mt-12 w-full max-w-5xl"
+          className="mx-auto mt-6 w-full max-w-5xl lg:mt-12"
         >
-          <div className="mb-4 flex items-center gap-3">
+          <div className="mb-3 flex items-center gap-3 lg:mb-4">
             {/* Main dot — static */}
             <span className="h-2 w-2 shrink-0 rounded-full bg-purple" />
 
-            <p className="flex items-center text-xs font-medium uppercase tracking-[0.2em] text-purple">
-              Master&apos;s Thesis Project
+            {/* flex-wrap + nowrap phrases: if it wraps on narrow screens,
+                it breaks cleanly between the two phrases, never mid-phrase */}
+            <p className="flex flex-wrap items-center text-xs font-medium uppercase tracking-[0.15em] text-purple sm:tracking-[0.2em]">
+              <span className="whitespace-nowrap">Master&apos;s Thesis Project</span>
 
               {/* Flashing separator dot */}
               <motion.span
@@ -158,7 +160,7 @@ export default function ProjectsPage() {
                 •
               </motion.span>
 
-              Active Development
+              <span className="whitespace-nowrap">Active Development</span>
             </p>
           </div>
 
@@ -166,7 +168,7 @@ export default function ProjectsPage() {
             Surround Vocal Spectrum Visualizer - SV2
           </h2>
 
-          <p className="mt-3 max-w-3xl text-lg italic leading-relaxed text-foreground/70">
+          <p className="mt-3 max-w-3xl text-base italic leading-relaxed text-foreground/70 sm:text-lg">
             A real-time audio visualizer plugin built in{" "}
             <strong className="font-semibold text-foreground/90">
               C++ with the JUCE framework
@@ -190,77 +192,75 @@ export default function ProjectsPage() {
             ))}
           </div>
 
-
           {/* <h3 className="mt-10 text-lg font-semibold uppercase tracking-[0.2em] text-purple">
             Motivation
           </h3> */}
 
-          <p className="mt-3 max-w-3xl text-xl leading-relaxed text-foreground/80">
-            Stemming from my passion for <strong>a cappella </strong>— the composition of music
+          <p className={`${bodyText} mt-5`}>
+            Stemming from my passion for <strong>a cappella</strong> — the composition of music
             centered around the human voice without external instruments,
             particularly in choir and collegiate groups — I wanted to create a
-            new way to understand what is happening within a vocal mix.  Various
-            details of a group's performance - overall member composition and 
-            voice characteristics, dynamics, blend, and timbre - can blur  the
-            ability to discern individual elements during the mixing process. 
+            new way to understand what is happening within a vocal mix. Various
+            details of a group&apos;s performance - overall member composition and
+            voice characteristics, dynamics, blend, and timbre - can blur the
+            ability to discern individual elements during the mixing process.
             I wanted to create a plugin that would provide visual feedback of the
             placement and balance of vocal elements in a mix, allowing users to
             better decide of stylistic choices and make adjustments to the mix.
-            </p>
-            
-
-          <h3 className="mt-10 text-lg font-semibold uppercase tracking-[0.2em] text-purple">
-            Development
-          </h3>  
-          <p className="mt-3 max-w-3xl text-xl leading-relaxed text-foreground/80">
-            Through my education at Berklee Valencia, I developed foundational knowledge 
-            in signal flow, audio processing, and surround sound mixing in Dolby
-            Atmos, which gave me the inspiration to create a plugin that 
-            visualizes the spatial distribution of elements in a mix. Leveraging 
-            my experience in software development from my undergraduate studies, 
-            I developed a plugin that provides real-time visual feedback of the 
-            frequency spectrum and spatial positioning of vocal elements, 
-            allowing users to see how their mix is distributed across the surround field. 
           </p>
 
-          <p className="mt-3 max-w-3xl text-xl leading-relaxed text-foreground/80">
-            The plugin uses different information parameters for the separate 
-            window monitoring to depict locational information in the surround 
-            space relative to the listener and the frequency spectrum of the 
+          <h3 className="mt-8 text-base font-semibold uppercase tracking-[0.2em] text-purple sm:text-lg lg:mt-10">
+            Development
+          </h3>
+          <p className={bodyText}>
+            Through my education at Berklee Valencia, I developed foundational knowledge
+            in signal flow, audio processing, and surround sound mixing in Dolby
+            Atmos, which gave me the inspiration to create a plugin that
+            visualizes the spatial distribution of elements in a mix. Leveraging
+            my experience in software development from my undergraduate studies,
+            I developed a plugin that provides real-time visual feedback of the
+            frequency spectrum and spatial positioning of vocal elements,
+            allowing users to see how their mix is distributed across the surround field.
+          </p>
+
+          <p className={bodyText}>
+            The plugin uses different information parameters for the separate
+            window monitoring to depict locational information in the surround
+            space relative to the listener and the frequency spectrum of the
             audio signal. For the <strong>spatial visualization</strong>, the plugin uses
             the relative signal level of each channel to determine the relative
-            volume coming out of each speaker in the source, which culminuates 
-            in a visual diagram similar to the polar pattern of a microhone,
+            volume coming out of each speaker in the source, which culminates
+            in a visual diagram similar to the polar pattern of a microphone,
             where the center of the diagram represents the listener and the
             speaker sources are points around the listener accompanied with their
             respective labels - Left, Right, Center, Left Surround, Right Surround,
             and a dedicated LFE meter for each channel toward the bottom of the
             plugin window close to the buttons. Given that lower frequency sends
-            are not typically used in a majority of the vocal mix, the LFE is 
+            are not typically used in a majority of the vocal mix, the LFE is
             mainly used in the Bass vocal group.
           </p>
 
-          <p className="mt-3 max-w-3xl text-xl leading-relaxed text-foreground/80">
-            For the <strong>frequency spectrum visualization</strong>, the plugin 
+          <p className={bodyText}>
+            For the <strong>frequency spectrum visualization</strong>, the plugin
             uses a Fast Fourier Transform (FFT) to analyze the audio signal and
             display the frequency content of the signal in real-time. The plugin
             displays a frequency spectrum graph that shows the amplitude of the
             audio signal across different frequencies, allowing users to see how
-            the vocal elements are distributed across the frequency spectrum. 
+            the vocal elements are distributed across the frequency spectrum.
             While the spatial diagram is for monitoring the placement of vocal
             elements in the surround field via panning, the frequency spectrum
             is for monitoring the timbre of different groups to aid in identifying
             spectral overlap and masking between groups, which can be a common
-            issue in acappella arrangements for clarity.
+            issue in a cappella arrangements for clarity.
           </p>
-          
-          <p className="mt-3 max-w-3xl text-xl leading-relaxed text-foreground/80">
-            Aside from the core default functionalty of the plugin, I also implemented 
-            a few additional features to enhance the user experience. Both windows of 
-            the plugin include a <strong>solo</strong> feature that allows users to 
+
+          <p className={bodyText}>
+            Aside from the core default functionality of the plugin, I also implemented
+            a few additional features to enhance the user experience. Both windows of
+            the plugin include a <strong>solo</strong> feature that allows users to
             isolate specific vocal groups for more detailed analysis. It also includes
             an overall input toggle to turn off specific signals from the mix, effectively
-            working as a mute button for a designated channel. These features allow the 
+            working as a mute button for a designated channel. These features allow the
             user to focus on specific elements of the mix and make more informed decisions,
             as well as the overall context of the mix via panning choices and balance of the mix.
           </p>
@@ -270,27 +270,27 @@ export default function ProjectsPage() {
             href={withBasePath("/SV2ThesisPaper.pdf")}
             target="_blank"
             rel="noopener noreferrer"
-            className="group mt-14 flex max-w-3xl items-center justify-between border-t border-purple/30 py-5 transition-opacity hover:opacity-60"
+            className="group mt-10 flex max-w-3xl items-center justify-between gap-4 border-t border-purple/30 py-5 transition-opacity hover:opacity-60 lg:mt-14"
           >
             <div>
-              <p className="text-lg uppercase tracking-[0.2em] text-purple">
+              <p className="text-sm uppercase tracking-[0.2em] text-purple sm:text-lg">
                 Thesis Documentation
               </p>
-              <p className="mt-1 font-sans text-lg font-medium">
+              <p className="mt-1 font-sans text-base font-medium sm:text-lg">
                 Surround Vocal Spectrum Visualizer — Master&apos;s Thesis
               </p>
             </div>
 
-            <span className="text-2xl transition-transform duration-200 group-hover:translate-x-1">
+            <span className="shrink-0 text-2xl transition-transform duration-200 group-hover:translate-x-1">
               ↗
             </span>
           </a>
 
-          <p className="mt-3 max-w-3xl text-md italic leading-relaxed text-foreground/80">
-            Official downloads for AAX, VST3, and AU are not yet available 
-            as I continue to refine the UI and feature set ahead of the project’s 
-            official release. In the meantime, feel free to explore the GitHub 
-            repository for a closer look at the project’s architecture, implementation, 
+          <p className="mt-3 max-w-3xl text-base italic leading-relaxed text-foreground/80">
+            Official downloads for AAX, VST3, and AU are not yet available
+            as I continue to refine the UI and feature set ahead of the project&apos;s
+            official release. In the meantime, feel free to explore the GitHub
+            repository for a closer look at the project&apos;s architecture, implementation,
             and ongoing development.
           </p>
 
@@ -305,13 +305,13 @@ export default function ProjectsPage() {
           </a>
 
           {/* Project images */}
-          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:mt-12">
             {projectImages.map((photo, index) => (
               <button
                 key={photo.src}
                 type="button"
                 onClick={() => setActiveImage(index)}
-                className="group relative aspect-video overflow-hidden rounded-xl bg-black/5 cursor-zoom-in"
+                className="group relative aspect-video cursor-zoom-in overflow-hidden rounded-xl bg-black/5"
               >
                 <Image
                   src={withBasePath(photo.src)}
@@ -326,7 +326,7 @@ export default function ProjectsPage() {
           </div>
 
           {/* Project pitch */}
-          <div className="mt-12">
+          <div className="mt-8 lg:mt-12">
             <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-purple">
               Project Pitch
             </p>
@@ -345,7 +345,7 @@ export default function ProjectsPage() {
           </div>
 
           {/* Demo reel */}
-          <div className="mt-12">
+          <div className="mt-8 lg:mt-12">
             <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-purple">
               Demo Reel
             </p>
@@ -360,7 +360,6 @@ export default function ProjectsPage() {
               />
             </div>
           </div>
-
         </motion.div>
       </motion.section>
 

@@ -32,14 +32,14 @@ export default function HeroText() {
     >
       <motion.p
         variants={item}
-        className="mb-4 text-xl uppercase tracking-[0.3em] text-foreground/70"
+        className="mb-2 text-sm uppercase tracking-[0.2em] text-foreground/70 sm:mb-4 sm:text-xl sm:tracking-[0.3em]"
       >
         Audio • Software • Music
       </motion.p>
 
       <motion.h1
         variants={item}
-        className="text-6xl leading-none sm:text-7xl lg:text-8xl font-sans font-semibold"
+        className="font-sans text-5xl font-semibold leading-[0.95] sm:text-7xl sm:leading-none lg:text-8xl"
       >
         Hi, I&apos;m Justin
         {/* <span className="font-handwriting font-normal"> */}
@@ -48,24 +48,24 @@ export default function HeroText() {
 
       <motion.p
         variants={item}
-        className="mt-6 max-w-xl text-xl leading-relaxed text-foreground text-pretty"
+        className="mt-3 max-w-xl text-base leading-normal text-foreground text-pretty sm:mt-6 sm:text-xl sm:leading-relaxed"
       >
         Software engineer specializing in audio technology, from studio production to building DAW plugins via C++ / JUCE.
       </motion.p>
 
       <motion.div
         variants={item}
-        className="mt-8 flex flex-wrap gap-6 text-sm uppercase tracking-[0.2em]"
+        className="mt-5 flex flex-wrap gap-5 text-sm uppercase tracking-[0.15em] sm:mt-8 sm:gap-6 sm:text-xl sm:tracking-[0.2em]"
       >
         <a
           href={withBasePath("/projects")}
-          className="text-xl border-b border-current pb-1 transition-opacity hover:opacity-60"
+          className="border-b border-current pb-1 transition-opacity hover:opacity-60"
         >
           View Projects
         </a>
         <a
           href={withBasePath("/about")}
-          className="text-xl border-b border-current pb-1 transition-opacity hover:opacity-60"
+          className="border-b border-current pb-1 transition-opacity hover:opacity-60"
         >
           About Me
         </a>

@@ -370,27 +370,9 @@ export default function AboutPage() {
               groups, and exploring new foods. I'm always looking for any recommendations
               for some good bites!
             </motion.p>
-          </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            className="hidden flex-col gap-4 lg:flex"
-          >
-            <div className="relative aspect-[3/4] w-full overflow-hidden">
-              <Image
-                src={withBasePath("/images/studio.webp")}
-                alt="Studio"
-                fill
-                className="object-cover object-center"
-              />
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Background links moved to the top */}
-            <motion.div variants={item} className="mt-6">
+            {/* Background + Currently listening, stacked in the left column beside the photo */}
+            <motion.div variants={item} className="mt-10 lg:mt-14">
               <h2 className="mb-4 font-sans text-2xl font-semibold text-foreground">
                 Background
               </h2>
@@ -411,38 +393,55 @@ export default function AboutPage() {
               </div>
             </motion.div>
 
-        <div className="h-8" />
+            <motion.div variants={item} className="mt-10 lg:mt-12">
+              <h2 className="font-sans text-2xl font-semibold text-foreground">
+                Currently listening
+              </h2>
 
-        <div className="max-w-3xl">
-          <h2 className="font-sans text-2xl font-semibold text-foreground">
-            Currently listening
-          </h2>
+              <p className="mt-3 max-w-2xl text-lg sm:text-xl leading-relaxed text-foreground/80">
+                A collection of songs I've been listening to, check out
+                some of tunes that have been inspiring me recently :)
+              </p>
 
-          <p className="mt-3 text-lg sm:text-xl leading-relaxed text-foreground/80">
-            A collection of songs I've been listening to, check out
-            some of tunes that have been inspiring me recently :)
-          </p>
+              <a
+                href="https://open.spotify.com/playlist/2h6NmrVarPILPwIyfVE1GR?si=f15ed16774b9472e"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 inline-flex items-center gap-2 text-lg font-medium text-foreground underline decoration-2 underline-offset-4 transition-opacity hover:opacity-60"
+              >
+                Listen on Spotify
+                <span aria-hidden="true">↗</span>
+              </a>
+            </motion.div>
+          </motion.div>
 
-          <a
-            href="https://open.spotify.com/playlist/2h6NmrVarPILPwIyfVE1GR?si=f15ed16774b9472e"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-5 inline-flex items-center gap-2 text-lg font-medium text-foreground underline decoration-2 underline-offset-4 transition-opacity hover:opacity-60"
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+            className="hidden flex-col gap-4 lg:flex"
           >
-            Listen on Spotify
-            <span aria-hidden="true">↗</span>
-          </a>
+            <div className="relative aspect-[3/4] w-full overflow-hidden">
+              <Image
+                src={withBasePath("/images/studio.webp")}
+                alt="Studio"
+                fill
+                className="object-cover object-center"
+              />
+            </div>
+          </motion.div>
         </div>
 
         {/* Cal Poly text */}
-        <div ref={calPolyRef} id="cal-poly" className="mt-16 max-w-3xl scroll-mt-24 lg:mt-24 lg:scroll-mt-36">
+        <div ref={calPolyRef} id="cal-poly" className="mt-16 scroll-mt-24 lg:mt-24 lg:scroll-mt-36">
           <h2 className="mb-4 font-sans text-2xl sm:text-3xl lg:text-4xl font-semibold text-foreground">
             Cal Poly San Luis Obispo
           </h2>
           {/* <h3 className="mb-4 font-sans text-lg font-semibold text-foreground">
             San Luis Obispo, California
           </h3> */}
-          <p className="mt-5 max-w-2xl text-lg sm:text-xl lg:mt-8 lg:text-2xl leading-relaxed text-foreground/80">
+          <div className="lg:mt-8">
+          <p className="mt-5 text-lg sm:text-xl lg:mt-0 lg:mb-8 lg:last:mb-0 lg:text-2xl leading-relaxed text-foreground/80">
             Growing up in a time when technology was becoming increasingly 
             woven into everyday life, I was drawn to understanding how complex 
             systems work and how they can be built to solve real problems. 
@@ -453,7 +452,7 @@ export default function AboutPage() {
             with hardware at a lower level.
           </p>
 
-          <p className="mt-5 max-w-2xl text-lg sm:text-xl lg:mt-8 lg:text-2xl leading-relaxed text-foreground/80">
+          <p className="mt-5 text-lg sm:text-xl lg:mt-0 lg:mb-8 lg:last:mb-0 lg:text-2xl leading-relaxed text-foreground/80">
             Some of my favorite courses focused on database systems and 
             design. In one class, my team used SQL and Python to build a 
             responsive shop system that managed inventory, changing weekly 
@@ -463,7 +462,7 @@ export default function AboutPage() {
           
           </p>
 
-          <p className="mt-5 max-w-2xl text-lg sm:text-xl lg:mt-8 lg:text-2xl leading-relaxed text-foreground/80">
+          <p className="mt-5 text-lg sm:text-xl lg:mt-0 lg:mb-8 lg:last:mb-0 lg:text-2xl leading-relaxed text-foreground/80">
             A large part of my college experience was spent with my time
             in Take It SLO, Cal Poly's premier acappella group. Coming into
             college, I was a huge fan of the acappella scene popularized by
@@ -475,6 +474,7 @@ export default function AboutPage() {
             arrange and produce music, and performed across the central coast
             and Los Angeles at various events throughout the years.
           </p>
+          </div>
         </div>
       </section>
 
@@ -515,14 +515,15 @@ export default function AboutPage() {
 
       <section className="mt-12 w-full px-6 pb-20 pt-8 sm:px-10 lg:mt-24 lg:px-16 lg:pb-32 lg:pt-16">
         {/* Berklee text */}
-        <div ref={berkleeRef} id="berklee" className="max-w-3xl scroll-mt-24 lg:scroll-mt-36">
+        <div ref={berkleeRef} id="berklee" className="scroll-mt-24 lg:scroll-mt-36">
           <h2 className="mb-4 font-sans text-2xl sm:text-3xl lg:text-4xl font-semibold text-foreground">
               Berklee Valencia - Berklee College of Music 
           </h2>
           {/* <h3 className="mb-4 font-sans text-lg font-semibold text-foreground">
             Valencia, Spain 
           </h3> */}
-          <p className="mt-5 max-w-2xl text-lg sm:text-xl lg:mt-8 lg:text-2xl leading-relaxed text-foreground/80">
+          <div className="lg:mt-8">
+          <p className="mt-5 text-lg sm:text-xl lg:mt-0 lg:mb-8 lg:last:mb-0 lg:text-2xl leading-relaxed text-foreground/80">
             In August 2025, I moved across the world from Northern California to Valencia,
             Spain to pursue a master's degree in Music Production, Technology, and Innovation. 
             I spent a year at Berklee College of Music's Valencia study abroad campus, 
@@ -534,7 +535,7 @@ export default function AboutPage() {
             understanding of how technology in the modern world has predominant influence
             on the way we create and consume audio.
           </p>
-
+          </div>
         </div>
       </section>
 
@@ -591,11 +592,11 @@ export default function AboutPage() {
         <PhotoCarousel photos={berkleeGallery} />
       </div> */}
 
-      <section className="mt-12 w-full max-w-6xl px-6 pb-24 pt-8 sm:px-10 lg:mt-24 lg:px-16 lg:pb-32 lg:pt-16">
+      <section className="mt-12 w-full px-6 pb-24 pt-8 sm:px-10 lg:mt-24 lg:px-16 lg:pb-32 lg:pt-16">
         <div
           ref={workRef}
           id="work"
-          className="max-w-xl scroll-mt-24 lg:scroll-mt-36"
+          className="scroll-mt-24 lg:scroll-mt-36"
         >
           <h2 className="mb-4 font-sans text-2xl sm:text-3xl lg:text-4xl font-semibold text-foreground">
             What I&apos;m working on now
@@ -605,9 +606,13 @@ export default function AboutPage() {
             San Francisco Bay Area, California
           </h3>
 
-          <p className="mt-5 max-w-2xl text-lg sm:text-xl lg:mt-8 lg:text-2xl leading-relaxed text-foreground/80">
-            Since completing my Master's and moving back from Spain, I've 
-            been working on a few different projects, including refinement 
+          <div className="lg:mt-8">
+          <p className="mt-5 text-lg sm:text-xl lg:mt-0 lg:mb-8 lg:last:mb-0 lg:text-2xl leading-relaxed text-foreground/80">
+            Since completing my Master's and moving back from Spain, I've
+            started working as a software developer with Data Annotation,
+            where I write and review coding problems in Python, JavaScript,
+            and C++ that are used to evaluate and train AI models. 
+            Additionally I&apos;ve been working on a few different projects, including refinement
             of my thesis project in anticipation for release, mixing and 
             production for various artists, and exploring new ideas for 
             software development in the audio scene. I've recently joined 
@@ -618,6 +623,7 @@ export default function AboutPage() {
             reach out to me if you'd like to chat about audio or software,
             I'd love to connect!
           </p>
+          </div>
         </div>
       </section>
 

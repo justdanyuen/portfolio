@@ -113,9 +113,8 @@ export default function ProjectsPage() {
 
   return (
     <div className="relative">
-      {/* Purple gradient band, fading down into the page background */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[800px] bg-gradient-to-b from-purple via-purple/50 to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[500px] bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,theme(colors.purple)_0%,transparent_70%)] opacity-70" />
+      {/* Subtle neutral band, pinned to viewport, matching the About page band */}
+      <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-screen bg-gradient-to-b from-[#B5B1A8] from-0% to-transparent to-70% opacity-60" />
 
       <motion.section
         variants={container}
@@ -133,7 +132,7 @@ export default function ProjectsPage() {
         {/* Featured project */}
         <motion.div
           variants={item}
-          className="mt-6 w-full max-w-[1400px] lg:mt-12"
+          className="mt-6 w-full lg:mt-12"
         >
           <div className="mb-3 flex items-center gap-3 lg:mb-4">
             {/* Main dot — static */}

@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Viewport-height breakpoints (desktop/laptop windows), used on the Resume page */
+@custom-variant short (@media (max-height: 1023px));
+@custom-variant tiny (@media (max-height: 899px));
+@custom-variant tall (@media (min-height: 1024px));
+
 :root {
   --background: #F4F1E9;
   --foreground: #171717;

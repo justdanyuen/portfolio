@@ -1,26 +1,11 @@
-"use client";
-
-import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence, type Variants } from "motion/react";
-import { withBasePath } from "@/lib/basePath";
-import Image from "next/image";
+import * as motion from "motion/react-client";
 import { FaGithub } from "react-icons/fa";
+import { withBasePath } from "@/lib/basePath";
+import { container, item } from "@/lib/motion";
+import Screenshots from "./Screenshots";
 
-const container: Variants = {
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
-  },
-};
-
-const item: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-  },
-};
+// Server component: the write-up is rendered to static HTML at build time.
+// Only the screenshot grid + lightbox (Screenshots) runs as client code.
 
 const tech = [
   { name: "C++", url: "https://www.geeksforgeeks.org/cpp/c-plus-plus/" },
@@ -68,49 +53,6 @@ const bodyText =
   "mt-3 max-w-3xl text-lg leading-relaxed text-foreground/80 sm:text-xl";
 
 export default function ProjectsPage() {
-  const [activeImage, setActiveImage] = useState<number | null>(null);
-
-  const showPrev = useCallback(() => {
-    setActiveImage((current) => {
-      if (current === null) return current;
-
-      return (current - 1 + projectImages.length) % projectImages.length;
-    });
-  }, []);
-
-  const showNext = useCallback(() => {
-    setActiveImage((current) => {
-      if (current === null) return current;
-
-      return (current + 1) % projectImages.length;
-    });
-  }, []);
-
-  // keyboard controls
-  useEffect(() => {
-    if (activeImage === null) return;
-
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        setActiveImage(null);
-      }
-
-      if (event.key === "ArrowLeft") {
-        showPrev();
-      }
-
-      if (event.key === "ArrowRight") {
-        showNext();
-      }
-    }
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [activeImage, showPrev, showNext]);
-
   return (
     <div className="relative">
       {/* Subtle neutral band, pinned to viewport, matching the About page band */}
@@ -308,25 +250,7 @@ export default function ProjectsPage() {
             </div>
 
             {/* Project images */}
-            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:sticky lg:top-36 lg:mt-5">
-              {projectImages.map((photo, index) => (
-                <button
-                  key={photo.src}
-                  type="button"
-                  onClick={() => setActiveImage(index)}
-                  className="group relative aspect-video cursor-zoom-in overflow-hidden rounded-xl bg-black/5"
-                >
-                  <Image
-                    src={withBasePath(photo.src)}
-                    alt={photo.alt}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                  />
-
-                  <div className="pointer-events-none absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/10" />
-                </button>
-              ))}
-            </div>
+            <Screenshots photos={projectImages} />
           </div>
 
           {/* Videos: stacked on mobile, side by side on desktop */}
@@ -369,81 +293,6 @@ export default function ProjectsPage() {
           </div>
         </motion.div>
       </motion.section>
-
-      <AnimatePresence>
-        {activeImage !== null && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-6"
-            onClick={() => setActiveImage(null)}
-          >
-            <motion.div
-              key={activeImage}
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{
-                duration: 0.2,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="flex max-h-[90vh] max-w-[90vw] flex-col items-center"
-              onClick={(event) => event.stopPropagation()}
-            >
-              <Image
-                src={withBasePath(projectImages[activeImage].src)}
-                alt={projectImages[activeImage].alt}
-                width={1920}
-                height={1080}
-                className="max-h-[75vh] w-auto max-w-[90vw] rounded-lg object-contain"
-              />
-
-              <p className="mt-5 max-w-2xl text-center text-sm leading-relaxed text-white/80 sm:text-base">
-                {projectImages[activeImage].caption}
-              </p>
-
-              <p className="mt-2 text-xs uppercase tracking-[0.2em] text-white/40">
-                {activeImage + 1} / {projectImages.length}
-              </p>
-            </motion.div>
-
-            <button
-              type="button"
-              onClick={(event) => {
-                event.stopPropagation();
-                showPrev();
-              }}
-              aria-label="Previous screenshot"
-              className="absolute left-4 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-3xl text-white transition-colors hover:bg-white/20 sm:left-8"
-            >
-              &#8249;
-            </button>
-
-            <button
-              type="button"
-              onClick={(event) => {
-                event.stopPropagation();
-                showNext();
-              }}
-              aria-label="Next screenshot"
-              className="absolute right-4 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-3xl text-white transition-colors hover:bg-white/20 sm:right-8"
-            >
-              &#8250;
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveImage(null)}
-              aria-label="Close preview"
-              className="absolute right-6 top-6 text-3xl text-white transition-opacity hover:opacity-60"
-            >
-              &times;
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

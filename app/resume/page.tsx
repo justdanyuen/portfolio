@@ -1,25 +1,10 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import { motion, AnimatePresence, type Variants } from "motion/react";
+import * as motion from "motion/react-client";
 import { withBasePath } from "@/lib/basePath";
+import { container, item, slideIn } from "@/lib/motion";
+import ResumePreview from "./ResumePreview";
 
-const container: Variants = {
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
-  },
-};
-
-const item: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-  },
-};
+// Server component: text and layout are rendered to static HTML at build time.
+// Only the preview card + full-screen viewer (ResumePreview) runs as client code.
 
 const skills = [
   { name: "C++", url: "https://www.geeksforgeeks.org/cpp/c-plus-plus/" },
@@ -61,26 +46,6 @@ const highlights = [
 ];
 
 export default function ResumePage() {
-  const [viewerOpen, setViewerOpen] = useState(false);
-
-  // Close on Escape, and lock background scrolling while the viewer is open
-  useEffect(() => {
-    if (!viewerOpen) return;
-
-    function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") setViewerOpen(false);
-    }
-
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [viewerOpen]);
-
   return (
     // overflow-x-clip (not hidden) prevents the slide-in animation from
     // widening the page on mobile without breaking lg:sticky below
@@ -192,13 +157,7 @@ export default function ResumePage() {
 
           {/* Resume */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{
-              duration: 0.9,
-              ease: [0.16, 1, 0.3, 1],
-              delay: 0.2,
-            }}
+            {...slideIn}
             // lg+: bottom padding lives here (not on the section) so the grid, and with it
             // the sticky left column's range, extends to the bottom of the page
             className="flex w-full max-w-[720px] flex-1 flex-col lg:block lg:max-w-none lg:pb-24"
@@ -227,68 +186,11 @@ export default function ResumePage() {
               </div>
             </div>
 
-            {/* Below lg: full page scaled to fit the leftover height, shadow hugs the paper.
-                lg+: the original white card at a fixed 8.5x11 ratio. */}
-            <button
-              type="button"
-              onClick={() => setViewerOpen(true)}
-              aria-label="View resume full screen"
-              className="relative block min-h-[240px] w-full flex-1 cursor-zoom-in transition-transform duration-500 hover:-translate-y-1 lg:aspect-[8.5/11] lg:min-h-0 lg:flex-none lg:overflow-hidden lg:rounded-xl lg:border lg:border-resume-blue/20 lg:bg-white lg:shadow-xl lg:shadow-black/10"
-            >
-              <Image
-                src={withBasePath("/images/resume.webp")}
-                alt="Justin Yuen resume"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 65vw"
-                className="object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.18)] lg:drop-shadow-none"
-              />
-            </button>
+            <ResumePreview />
           </motion.div>
         </div>
       </section>
 
-      {/* Full-screen viewer: resume at full width, scrolls vertically */}
-      <AnimatePresence>
-        {viewerOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[100] overflow-y-auto bg-black/90"
-            onClick={() => setViewerOpen(false)}
-          >
-            <div className="flex min-h-full items-start justify-center px-4 py-16 sm:px-8">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.97 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.97 }}
-                transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="w-full max-w-3xl"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <Image
-                  src={withBasePath("/images/resume.webp")}
-                  alt="Justin Yuen resume"
-                  width={1700}
-                  height={2200}
-                  className="h-auto w-full rounded-md bg-white"
-                />
-              </motion.div>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => setViewerOpen(false)}
-              aria-label="Close resume viewer"
-              className="fixed right-5 top-4 text-4xl text-white transition-opacity hover:opacity-60"
-            >
-              &times;
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

@@ -1,19 +1,15 @@
-"use client";
-
-import { useRef, useState, useEffect, useCallback, useLayoutEffect } from "react";
 import Image from "next/image";
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useTransform,
-  useMotionTemplate,
-  type Variants,
-} from "motion/react";
-import AccentBlock from "@/components/AccentBlock";
-import { withBasePath } from "@/lib/basePath";
 import Link from "next/link";
-import PhotoCarousel from "@/components/PhotoCarousel";
+import * as motion from "motion/react-client";
+import AccentBlock from "@/components/AccentBlock";
+import { thumbPath } from "@/lib/basePath";
+import { container, item, slideIn } from "@/lib/motion";
+import ColorBand from "./ColorBand";
+import PhotoStrip from "./PhotoStrip";
+
+// Server component: all text and layout is rendered to static HTML at build time.
+// Interactive pieces are small client components: ColorBand (scroll-linked
+// background) and PhotoStrip (gallery tiles + lightbox).
 
 const background = [
   {
@@ -147,187 +143,11 @@ const berkleeGallery = [
   },
 ];
 
-const container: Variants = {
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
-  },
-};
-
-const item: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-  },
-};
-
-// Neutral base color shown before reaching either section
-// const BASE_COLOR = "#E0C468";
-const BASE_COLOR = "#B5B1A8";
-const BERKLEE_COLOR = "#B23B3B";
-const CAL_POLY_COLOR = "#4A7C4E";
-const WORK_COLOR = "#4C6F8C";
-
 export default function AboutPage() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const berkleeRef = useRef<HTMLDivElement>(null);
-  const calPolyRef = useRef<HTMLDivElement>(null);
-  const workRef = useRef<HTMLDivElement>(null);
-  const [activePhoto, setActivePhoto] = useState<{
-    gallery: "calpoly" | "berklee";
-    index: number;
-  } | null>(null);  
-  const activeGallery =
-  activePhoto?.gallery === "calpoly" ? calpolyGallery : berkleeGallery;
-  const [sectionFractions, setSectionFractions] = useState({
-    berklee: 0.65,
-    calPoly: 0.25,
-    work: 0.85,
-  });
-
-  const { scrollYProgress } = useScroll({
-    target: scrollRef,
-    offset: ["start start", "end end"],
-  });
-
-  // Measure where the Cal Poly and Berklee sections actually sit
-  // as a fraction of total scrollable height, so the color band
-  // lines up with the real anchors instead of a flat page-wide guess.
-  useLayoutEffect(() => {
-    function measure() {
-      const container = scrollRef.current;
-      const berklee = berkleeRef.current;
-      const calPoly = calPolyRef.current;
-      const work = workRef.current;
-      if (!container || !berklee || !calPoly || !work) return;
-
-      // Read the anchors' actual scroll-margin-top (scroll-mt-24 on mobile,
-      // scroll-mt-36 on lg) so the color band lines up at every breakpoint
-      const NAV_OFFSET = parseFloat(getComputedStyle(berklee).scrollMarginTop) || 0;
-
-      const totalHeight = container.scrollHeight - window.innerHeight;
-      if (totalHeight <= 0) return;
-
-      const berkleeOffset = getOffsetWithin(berklee, container) - NAV_OFFSET;
-      const calPolyOffset = getOffsetWithin(calPoly, container) - NAV_OFFSET;
-      const workOffset = getOffsetWithin(work, container) - NAV_OFFSET;
-      setSectionFractions({
-        berklee: Math.min(Math.max(berkleeOffset / totalHeight, 0), 1),
-        calPoly: Math.min(Math.max(calPolyOffset / totalHeight, 0), 1),
-        work: Math.min(Math.max(workOffset / totalHeight, 0), 1),
-      });
-    }
-
-    function getOffsetWithin(el: HTMLElement, ancestor: HTMLElement) {
-      let offset = 0;
-      let node: HTMLElement | null = el;
-      while (node && node !== ancestor) {
-        offset += node.offsetTop;
-        node = node.offsetParent as HTMLElement | null;
-      }
-      return offset;
-    }
-
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, []);
-
-  // Neutral at top -> green once Cal Poly section is reached -> red once Berklee is reached
-  const bandColor = useTransform(
-  scrollYProgress,
-  [
-    0,
-    Math.max(sectionFractions.calPoly - 0.2, 0.01),
-    sectionFractions.calPoly,
-    Math.max(
-      sectionFractions.berklee - 0.2,
-      sectionFractions.calPoly + 0.1
-    ),
-    sectionFractions.berklee,
-    Math.max(
-      sectionFractions.work - 0.15,
-      sectionFractions.berklee + 0.05
-    ),
-    sectionFractions.work,
-    1,
-  ],
-  [
-    BASE_COLOR,
-    BASE_COLOR,
-    CAL_POLY_COLOR,
-    CAL_POLY_COLOR,
-    BERKLEE_COLOR,
-    BERKLEE_COLOR,
-    WORK_COLOR,
-    WORK_COLOR,
-  ]
-);
-
-  const bandBackground = useMotionTemplate`linear-gradient(to bottom, ${bandColor} 0%, transparent 70%)`;
-
-  const scrollCarousel = (direction: "left" | "right") => {
-    const el = carouselRef.current;
-    if (!el) return;
-    const amount = el.clientWidth * 0.8;
-    el.scrollBy({
-      left: direction === "left" ? -amount : amount,
-      behavior: "smooth",
-    });
-  };
-
-  const showPrev = useCallback(() => {
-    setActivePhoto((current) => {
-      if (current === null) return current;
-
-      const gallery =
-        current.gallery === "calpoly" ? calpolyGallery : berkleeGallery;
-
-      return {
-        ...current,
-        index: (current.index - 1 + gallery.length) % gallery.length,
-      };
-    });
-  }, []);
-
-  const showNext = useCallback(() => {
-    setActivePhoto((current) => {
-      if (current === null) return current;
-
-      const gallery =
-        current.gallery === "calpoly" ? calpolyGallery : berkleeGallery;
-
-      return {
-        ...current,
-        index: (current.index + 1) % gallery.length,
-      };
-    });
-  }, []);
-
-  // Keyboard navigation for the lightbox
-  useEffect(() => {
-    if (activePhoto === null) return;
-
-    function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") setActivePhoto(null);
-      if (e.key === "ArrowLeft") showPrev();
-      if (e.key === "ArrowRight") showNext();
-    }
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [activePhoto, showPrev, showNext]);
-
   return (
-    <div ref={scrollRef} className="relative">
+    <div className="relative">
       {/* Scroll-linked color band, pinned to viewport, tracks real section positions */}
-      <motion.div
-        className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-screen opacity-60"
-        style={{ background: bandBackground }}
-      />
+      <ColorBand />
 
       <section className="w-full px-6 pb-20 pt-20 sm:px-10 lg:px-16 lg:pb-32 lg:pt-36">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.3fr_1fr] lg:items-start">
@@ -415,17 +235,14 @@ export default function AboutPage() {
             </motion.div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            className="hidden flex-col gap-4 lg:flex"
-          >
+          <motion.div {...slideIn} className="hidden flex-col gap-4 lg:flex">
             <div className="relative aspect-[3/4] w-full overflow-hidden">
               <Image
-                src={withBasePath("/images/studio.webp")}
+                src={thumbPath("/images/studio.webp")}
                 alt="Studio"
                 fill
+                priority
+                sizes="(min-width: 1024px) 40vw, 100vw"
                 className="object-cover object-center"
               />
             </div>
@@ -433,7 +250,7 @@ export default function AboutPage() {
         </div>
 
         {/* Cal Poly text */}
-        <div ref={calPolyRef} id="cal-poly" className="mt-16 scroll-mt-24 lg:mt-24 lg:scroll-mt-36">
+        <div id="cal-poly" className="mt-16 scroll-mt-24 lg:mt-24 lg:scroll-mt-36">
           <h2 className="mb-4 font-sans text-2xl sm:text-3xl lg:text-4xl font-semibold text-foreground">
             Cal Poly San Luis Obispo
           </h2>
@@ -480,32 +297,7 @@ export default function AboutPage() {
 
       {/* Cal Poly gallery */}
       <div className="-mt-12 px-6 sm:px-10 lg:px-16">
-        <div className="group/carousel relative">
-          <div
-            className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          >
-            {calpolyGallery.map((photo, index) => (
-              <button
-                key={photo.alt}
-                type="button"
-                onClick={() =>
-                  setActivePhoto({
-                    gallery: "calpoly",
-                    index,
-                  })
-                }
-                className="relative aspect-square w-[45%] flex-shrink-0 snap-start cursor-zoom-in overflow-hidden transition-opacity hover:opacity-90 sm:w-[23%]"
-              >
-                <Image
-                  src={withBasePath(photo.src)}
-                  alt={photo.alt}
-                  fill
-                  className="object-cover object-center"
-                />
-              </button>
-            ))}
-          </div>
-        </div>
+        <PhotoStrip photos={calpolyGallery} />
       </div>
 
       {/* Photo Carousel Cal Poly */}
@@ -515,7 +307,7 @@ export default function AboutPage() {
 
       <section className="mt-12 w-full px-6 pb-20 pt-8 sm:px-10 lg:mt-24 lg:px-16 lg:pb-32 lg:pt-16">
         {/* Berklee text */}
-        <div ref={berkleeRef} id="berklee" className="scroll-mt-24 lg:scroll-mt-36">
+        <div id="berklee" className="scroll-mt-24 lg:scroll-mt-36">
           <h2 className="mb-4 font-sans text-2xl sm:text-3xl lg:text-4xl font-semibold text-foreground">
               Berklee Valencia - Berklee College of Music 
           </h2>
@@ -541,50 +333,7 @@ export default function AboutPage() {
 
       {/* Berklee gallery */}
       <div className="-mt-12 px-6 sm:px-10 lg:px-16">
-        <div className="group/carousel relative">
-          <div
-            ref={carouselRef}
-            className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          >
-            {berkleeGallery.map((photo, index) => (
-              <button
-                key={photo.alt}
-                type="button"
-                onClick={() =>
-                  setActivePhoto({
-                    gallery: "berklee",
-                    index,
-                  })
-                }                
-                className="relative aspect-square w-[45%] flex-shrink-0 snap-start cursor-zoom-in overflow-hidden transition-opacity hover:opacity-90 sm:w-[23%]"
-              >
-                <Image
-                  src={withBasePath(photo.src)}
-                  alt={photo.alt}
-                  fill
-                  className="object-cover object-center"
-                />
-              </button>
-            ))}
-          </div>
-
-          <button
-            type="button"
-            onClick={() => scrollCarousel("left")}
-            aria-label="Scroll gallery left"
-            className="absolute left-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-foreground opacity-0 shadow-md transition-opacity duration-200 group-hover/carousel:opacity-100 hover:bg-white"
-          >
-            &#8249;
-          </button>
-          <button
-            type="button"
-            onClick={() => scrollCarousel("right")}
-            aria-label="Scroll gallery right"
-            className="absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-foreground opacity-0 shadow-md transition-opacity duration-200 group-hover/carousel:opacity-100 hover:bg-white"
-          >
-            &#8250;
-          </button>
-        </div>
+        <PhotoStrip photos={berkleeGallery} arrows />
       </div>
 
       {/* Photo Carousel Berklee */}
@@ -594,7 +343,6 @@ export default function AboutPage() {
 
       <section className="mt-12 w-full px-6 pb-24 pt-8 sm:px-10 lg:mt-24 lg:px-16 lg:pb-32 lg:pt-16">
         <div
-          ref={workRef}
           id="work"
           className="scroll-mt-24 lg:scroll-mt-36"
         >
@@ -627,77 +375,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Lightbox with prev/next navigation and captions */}
-      <AnimatePresence>
-        {activePhoto !== null && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-6"
-            onClick={() => setActivePhoto(null)}
-          >
-            <motion.div
-              key={`${activePhoto.gallery}-${activePhoto.index}`}
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="flex max-h-[90vh] max-w-[90vw] flex-col items-center"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="relative max-h-[75vh] w-auto max-w-[90vw]">
-                <Image
-                  src={withBasePath(activeGallery[activePhoto.index].src)}
-                  alt={activeGallery[activePhoto.index].alt}
-                  width={1600}
-                  height={1600}
-                  className="max-h-[75vh] w-auto max-w-[90vw] object-contain"
-                />
-              </div>
-              {activeGallery[activePhoto.index].caption && (
-                <p className="mt-4 text-center text-sm text-white/80">
-                  {activeGallery[activePhoto.index].caption}
-                </p>
-              )}
-            </motion.div>
-
-            {/* Prev / next controls */}
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                showPrev();
-              }}
-              aria-label="Previous photo"
-              className="absolute left-4 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-3xl text-white transition-colors hover:bg-white/20 sm:left-8"
-            >
-              &#8249;
-            </button>
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                showNext();
-              }}
-              aria-label="Next photo"
-              className="absolute right-4 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-3xl text-white transition-colors hover:bg-white/20 sm:right-8"
-            >
-              &#8250;
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActivePhoto(null)}
-              aria-label="Close preview"
-              className="absolute right-6 top-6 text-3xl text-white transition-opacity hover:opacity-60"
-            >
-              &times;
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

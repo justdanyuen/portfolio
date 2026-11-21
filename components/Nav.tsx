@@ -6,12 +6,14 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, type Variants } from "motion/react";
 import { withBasePath } from "@/lib/basePath";
+import { showMusicPage } from "@/lib/features";
 
 const links = [
   { href: "/about", label: "ABOUT" },
   { href: "/projects", label: "PROJECTS" },
+  { href: "/music", label: "MUSIC" },
   { href: "/resume", label: "RESUME" },
-];
+].filter((link) => link.href !== "/music" || showMusicPage); // Music is WIP: dev only
 
 const linkClass =
   "transition-all duration-200 hover:scale-110 hover:opacity-60";

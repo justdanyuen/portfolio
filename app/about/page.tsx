@@ -5,7 +5,7 @@ import AccentBlock from "@/components/AccentBlock";
 import { thumbPath } from "@/lib/basePath";
 import { container, item, slideIn } from "@/lib/motion";
 import ColorBand from "./ColorBand";
-import PhotoStrip from "./PhotoStrip";
+import PhotoStrip from "@/components/PhotoStrip";
 
 // Server component: all text and layout is rendered to static HTML at build time.
 // Interactive pieces are small client components: ColorBand (scroll-linked
@@ -171,8 +171,8 @@ export default function AboutPage() {
               variants={item}
               className="mt-5 max-w-2xl text-lg sm:text-xl lg:mt-8 lg:text-2xl leading-relaxed text-foreground/80"
             >
-              My interest in sound began at a young age when I fell in love with 
-              singing. That curiosity grew during my time in collegiate a cappella, 
+              My interest in sound began at a young age when I fell in love with
+              singing, and grew through ten years of classical piano. That curiosity grew during my time in collegiate a cappella, 
               where I became fascinated with microphones, live sound, and the 
               technology behind a performance and capturing the moment.
               Eventually, that interest led me into the recording studio and 
@@ -291,6 +291,32 @@ export default function AboutPage() {
             arrange and produce music, and performed across the central coast
             and Los Angeles at various events throughout the years.
           </p>
+
+          <p className="mt-5 text-lg sm:text-xl lg:mt-0 lg:mb-8 lg:last:mb-0 lg:text-2xl leading-relaxed text-foreground/80">
+            From 2022 to 2025, I served as the group&apos;s music director,
+            leading bi-weekly rehearsals on tone, blend, dynamics, and
+            articulation. I also arranged for the group and took our music
+            into the studio, directing recording sessions and helping with
+            tracking, vocal editing, and mixing on releases like{" "}
+            <a
+              href="https://open.spotify.com/album/0jFUVSndXAwJE3mkDjCEUJ"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-foreground underline decoration-1 underline-offset-4 transition-opacity hover:opacity-60"
+            >
+              Undone
+            </a>{" "}
+            and{" "}
+            <a
+              href="https://open.spotify.com/album/6NCQVfbNQqPTqugVzrMxQB"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-foreground underline decoration-1 underline-offset-4 transition-opacity hover:opacity-60"
+            >
+              erase me
+            </a>
+            , which have passed 150k streams.
+          </p>
           </div>
         </div>
       </section>
@@ -326,6 +352,18 @@ export default function AboutPage() {
             projects with artists and developers from around the world, and gained a deeper 
             understanding of how technology in the modern world has predominant influence
             on the way we create and consume audio.
+          </p>
+
+          <p className="mt-5 text-lg sm:text-xl lg:mt-0 lg:mb-8 lg:last:mb-0 lg:text-2xl leading-relaxed text-foreground/80">
+            Outside of class, I founded and directed Viva Voce, an a cappella
+            group bringing together singers from around the world. The
+            group&apos;s recordings became source material for my thesis
+            project,{" "}
+            <Link href="/projects" className="font-medium text-foreground underline decoration-1 underline-offset-4 transition-opacity hover:opacity-60">
+              SV2
+            </Link>
+            , a surround vocal spectrum visualizer built to make dense a
+            cappella mixes easier to understand.
           </p>
           </div>
         </div>

@@ -1,11 +1,12 @@
 import * as motion from "motion/react-client";
+import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 import { withBasePath } from "@/lib/basePath";
 import { container, item } from "@/lib/motion";
 import Screenshots from "./Screenshots";
 
 // Server component: the write-up is rendered to static HTML at build time.
-// Only the screenshot grid + lightbox (Screenshots) runs as client code.
+// Only the screenshot carousel + lightbox (Screenshots) runs as client code.
 
 const tech = [
   { name: "C++", url: "https://www.geeksforgeeks.org/cpp/c-plus-plus/" },
@@ -50,7 +51,7 @@ const projectImages = [
 
 // Shared body-paragraph style: smaller on mobile, original text-xl from sm up
 const bodyText =
-  "mt-3 max-w-3xl text-lg leading-relaxed text-foreground/80 sm:text-xl";
+  "mt-3 text-lg leading-relaxed text-foreground/80 sm:text-xl";
 
 export default function ProjectsPage() {
   return (
@@ -133,8 +134,10 @@ export default function ProjectsPage() {
             ))}
           </div>
 
-          {/* Desktop: writeup on the left, screenshots pinned alongside it on the right */}
-          <div className="lg:grid lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-start lg:gap-12 xl:gap-16">
+          {/* Project images: carousel under the tags, above the writeup */}
+          <Screenshots photos={projectImages} />
+
+          <div>
             <div>
               {/* <h3 className="mt-10 text-lg font-semibold uppercase tracking-[0.2em] text-purple">
                 Motivation
@@ -157,7 +160,14 @@ export default function ProjectsPage() {
                 Development
               </h3>
               <p className={bodyText}>
-                Through my education at Berklee Valencia, I developed foundational knowledge
+                Through my education at{" "}
+                <Link
+                  href="/about#berklee"
+                  className="font-bold text-[#B23B3B] underline-offset-4 transition-opacity hover:underline hover:opacity-75"
+                >
+                  Berklee Valencia
+                </Link>
+                , I developed foundational knowledge
                 in signal flow, audio processing, and surround sound mixing in Dolby
                 Atmos, which gave me the inspiration to create a plugin that
                 visualizes the spatial distribution of elements in a mix. Leveraging
@@ -165,13 +175,14 @@ export default function ProjectsPage() {
                 I developed a plugin that provides real-time visual feedback of the
                 frequency spectrum and spatial positioning of vocal elements,
                 allowing users to see how their mix is distributed across the surround field.
-              </p>
-
-              <p className={bodyText}>
                 The plugin uses different information parameters for the separate
                 window monitoring to depict locational information in the surround
                 space relative to the listener and the frequency spectrum of the
-                audio signal. For the <strong>spatial visualization</strong>, the plugin uses
+                audio signal. 
+              </p>
+
+              <p className={bodyText}>
+                For <strong>spatial visualization</strong>, the plugin uses
                 the relative signal level of each channel to determine the relative
                 volume coming out of each speaker in the source, which culminates
                 in a visual diagram similar to the polar pattern of a microphone,
@@ -185,7 +196,7 @@ export default function ProjectsPage() {
               </p>
 
               <p className={bodyText}>
-                For the <strong>frequency spectrum visualization</strong>, the plugin
+                For <strong>frequency spectrum visualization</strong>, the plugin
                 uses a Fast Fourier Transform (FFT) to analyze the audio signal and
                 display the frequency content of the signal in real-time. The plugin
                 displays a frequency spectrum graph that shows the amplitude of the
@@ -214,7 +225,7 @@ export default function ProjectsPage() {
                 href={withBasePath("/SV2ThesisPaper.pdf")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group mt-10 flex max-w-3xl items-center justify-between gap-4 border-t border-purple/30 py-5 transition-opacity hover:opacity-60 lg:mt-14"
+                className="group mt-10 flex items-center justify-between gap-4 border-t border-purple/30 py-5 transition-opacity hover:opacity-60 lg:mt-14"
               >
                 <div>
                   <p className="text-sm uppercase tracking-[0.2em] text-purple sm:text-lg">
@@ -230,7 +241,7 @@ export default function ProjectsPage() {
                 </span>
               </a>
 
-              <p className="mt-3 max-w-3xl text-base italic leading-relaxed text-foreground/80">
+              <p className="mt-3 text-base italic leading-relaxed text-foreground/80">
                 Official downloads for AAX, VST3, and AU are not yet available
                 as I continue to refine the UI and feature set ahead of the project&apos;s
                 official release. In the meantime, feel free to explore the GitHub
@@ -248,9 +259,6 @@ export default function ProjectsPage() {
                 View Source on GitHub ↗
               </a>
             </div>
-
-            {/* Project images */}
-            <Screenshots photos={projectImages} />
           </div>
 
           {/* Videos: stacked on mobile, side by side on desktop */}

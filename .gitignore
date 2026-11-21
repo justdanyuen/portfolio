@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/node_modules.nosync  # real node_modules; the .nosync name keeps iCloud from offloading it
 /.pnp
 .pnp.*
 .yarn/*
@@ -43,3 +44,9 @@ public/videos/SV2_demo.mp4
 public/videos/SV2_pitch.mp4
 public/videos/SV2_demo_stereo.mp4
 public/videos/SV2_demo_youtube.mp4
+PRODUCT.md
+
+# Music page: original masters stay local; the site uses the compressed copies
+# (.m4a/.mp3 demos, .webp reel covers)
+/public/audio/**/*.wav
+/public/images/music/reels/*.JPG

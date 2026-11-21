@@ -18,14 +18,16 @@ const ROOT = path.resolve("public/images");
 const OUT = path.join(ROOT, "thumbs");
 
 // Folders/files that get thumbnails (SV2 screenshots are already ~20KB, so skipped)
-const SOURCES = ["cal-poly", "berklee", "studio.webp"];
+const SOURCES = ["cal-poly", "berklee", "music", "studio.webp"];
 
 // 960px covers gallery tiles on 2x displays and inline photos on 1x displays
 const WIDTH = 960;
 const QUALITY = 78;
 
 async function* walk(p) {
-  const s = await stat(p);
+  const s = await stat(p).catch(() => null);
+  if (!s) return; // source folder not created yet
+
   if (s.isFile()) {
     yield p;
     return;

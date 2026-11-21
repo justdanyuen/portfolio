@@ -17,6 +17,8 @@
   --color-purple-light: #A98FD2;
   --color-resume-blue: #5C7A94;
   --color-resume-blue-light: #A7BCCB;
+  --color-music: #A3622B;
+  --color-music-light: #E3C4A4;
 }
 
 @theme inline {

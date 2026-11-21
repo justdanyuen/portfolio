@@ -5,25 +5,26 @@ import Image from "next/image";
 import Lightbox, { type LightboxPhoto } from "@/components/Lightbox";
 import { withBasePath } from "@/lib/basePath";
 
-// SV2 screenshot grid; clicking a tile opens it in the lightbox
+// SV2 screenshots in a single row, spread edge to edge with even gaps
+// (2 per row on phones); clicking one opens it in the lightbox
 export default function Screenshots({ photos }: { photos: LightboxPhoto[] }) {
   const [active, setActive] = useState<number | null>(null);
 
   return (
     <>
-      <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:sticky lg:top-36 lg:mt-5">
+      <div className="mt-6 grid grid-cols-2 gap-4 sm:flex sm:justify-between sm:gap-0 lg:mt-8">
         {photos.map((photo, index) => (
           <button
             key={photo.src}
             type="button"
             onClick={() => setActive(index)}
-            className="group relative aspect-video cursor-zoom-in overflow-hidden rounded-xl bg-black/5"
+            className="group relative aspect-video cursor-zoom-in overflow-hidden rounded-xl bg-black/5 sm:w-[22.5%]"
           >
             <Image
               src={withBasePath(photo.src)}
               alt={photo.alt}
               fill
-              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+              sizes="(min-width: 640px) 23vw, 45vw"
               className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
             />
 

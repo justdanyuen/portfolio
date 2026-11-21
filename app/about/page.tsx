@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import * as motion from "motion/react-client";
 import AccentBlock from "@/components/AccentBlock";
+import AlbumMarquee from "@/components/AlbumMarquee";
+import { getPlaylistTracks } from "@/lib/spotify";
 import { thumbPath } from "@/lib/basePath";
 import { container, item, slideIn } from "@/lib/motion";
 import ColorBand from "./ColorBand";
@@ -143,7 +145,12 @@ const berkleeGallery = [
   },
 ];
 
-export default function AboutPage() {
+// "Currently listening" playlist: covers are fetched at build time
+const PLAYLIST_ID = "2h6NmrVarPILPwIyfVE1GR";
+
+export default async function AboutPage() {
+  const playlistTracks = await getPlaylistTracks(PLAYLIST_ID);
+
   return (
     <div className="relative">
       {/* Scroll-linked color band, pinned to viewport, tracks real section positions */}
@@ -151,7 +158,7 @@ export default function AboutPage() {
 
       <section className="w-full px-6 pb-20 pt-20 sm:px-10 lg:px-16 lg:pb-32 lg:pt-36">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.3fr_1fr] lg:items-start">
-          <motion.div variants={container} initial="hidden" animate="show">
+          <motion.div variants={container} initial="hidden" animate="show" className="min-w-0">
             <motion.h1
               variants={item}
               className="font-sans text-3xl font-bold text-foreground sm:text-4xl"
@@ -222,6 +229,8 @@ export default function AboutPage() {
                 A collection of songs I've been listening to, check out
                 some of tunes that have been inspiring me recently :)
               </p>
+
+              {playlistTracks.length > 0 && <AlbumMarquee tracks={playlistTracks} />}
 
               <a
                 href="https://open.spotify.com/playlist/2h6NmrVarPILPwIyfVE1GR?si=f15ed16774b9472e"

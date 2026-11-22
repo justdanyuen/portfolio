@@ -18,13 +18,12 @@ const links = [
 const linkClass =
   "transition-all duration-200 hover:scale-110 hover:opacity-60";
 
-// Each page's accent color, so the mobile menu matches the band behind the nav
-const pageAccents: Record<string, string> = {
-  "/": "var(--color-olive)",
-  "/about": "#B5B1A8", // matches BASE_COLOR on the About page
-  "/projects": "var(--color-purple)",
-  "/resume": "var(--color-resume-blue)",
-};
+// One neutral tint for the mobile menu on every page (the warm grey of the
+// About/Music/Resume page bands), light at the top fading lighter below
+const menuAccent = "#B5B1A8";
+const panelBackground = `linear-gradient(to bottom,
+  color-mix(in srgb, ${menuAccent} 80%, white) 0%,
+  color-mix(in srgb, ${menuAccent} 45%, white) 100%)`;
 
 // Shared styles for the three hamburger lines (sized for the 48px button)
 const barClass =
@@ -49,13 +48,6 @@ export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  // Light tint of the page's accent: close to the accent at the top (matching
-  // the nav bar), fading lighter toward the bottom
-  const accent = pageAccents[pathname] ?? "var(--background)";
-  const panelBackground = `linear-gradient(to bottom,
-    color-mix(in srgb, ${accent} 80%, white) 0%,
-    color-mix(in srgb, ${accent} 45%, white) 100%)`;
-
   // Close the menu with Escape
   useEffect(() => {
     if (!menuOpen) return;
@@ -69,12 +61,9 @@ export default function Nav() {
   }, [menuOpen]);
 
   return (
-    <motion.nav
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed top-0 left-0 right-0 z-50"
-    >
+    // No load fade: the nav renders with the page (a fade would wait for
+    // hydration, and an opacity < 1 ancestor also disables backdrop-filter)
+    <nav className="fixed top-0 left-0 right-0 z-50">
       {/* Mobile: soften the page behind the open menu (blur, no darkening);
           tapping it closes the menu */}
       <AnimatePresence>
@@ -103,7 +92,7 @@ export default function Nav() {
         }}
       />
 
-      {/* Actual nav content -- sits above the blur layer, never fades */}
+      {/* Actual nav content -- sits above the blur layer */}
       <div className="relative flex items-center justify-between gap-4 p-4 md:p-6">
         <Link
           href="/"
@@ -205,6 +194,6 @@ export default function Nav() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </nav>
   );
 }

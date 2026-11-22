@@ -38,7 +38,7 @@ function ComingSoon({ children }: { children: React.ReactNode }) {
 // Album cards: cover art, title, roles; opens the release on Spotify
 function ReleaseGrid({ items }: { items: Release[] }) {
   return (
-    <ul className="grid grid-cols-3 gap-4 sm:grid-cols-4 sm:gap-6 lg:grid-cols-6">
+    <ul className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4 sm:gap-6 lg:grid-cols-6">
       {items.map((r) => (
         <li key={r.url}>
           <a
@@ -52,7 +52,7 @@ function ReleaseGrid({ items }: { items: Release[] }) {
                 src={withBasePath(r.cover)}
                 alt={`${r.title} cover art`}
                 fill
-                sizes="(min-width: 1024px) 15vw, (min-width: 640px) 22vw, 30vw"
+                sizes="(min-width: 1024px) 15vw, (min-width: 640px) 22vw, 45vw"
                 className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
               />
             </div>
@@ -63,13 +63,21 @@ function ReleaseGrid({ items }: { items: Release[] }) {
               </p>
             </div>
             <p className="text-sm text-foreground/60">
-              {[r.artist, r.year].filter(Boolean).join(" · ")}
+              {[r.artist, r.year].filter(Boolean).map((detail, i, arr) => (
+                <span key={i}>
+                  {i > 0 && " "}
+                  <span className="whitespace-nowrap">
+                    {detail}
+                    {i < arr.length - 1 && " ·"}
+                  </span>
+                </span>
+              ))}
             </p>
             <div className="mt-2 flex flex-wrap gap-1.5">
               {r.roles.map((role) => (
                 <span
                   key={role}
-                  className="rounded-md border border-music/40 px-2 py-0.5 text-xs font-medium text-music"
+                  className="whitespace-nowrap rounded-md border border-music/40 px-2 py-0.5 text-xs font-medium text-music"
                 >
                   {role}
                 </span>
@@ -150,6 +158,7 @@ function ArrangementList({
               {a.title}
             </p>
             <p className="text-sm text-foreground/60 sm:text-base">
+              {/* each detail stays whole; lines only break between details */}
               {[
                 `Originally by ${a.originalArtist}`,
                 a.voicing,
@@ -157,7 +166,15 @@ function ArrangementList({
                 a.year,
               ]
                 .filter(Boolean)
-                .join(" · ")}
+                .map((detail, i, arr) => (
+                  <span key={i}>
+                    {i > 0 && " "}
+                    <span className="whitespace-nowrap">
+                      {detail}
+                      {i < arr.length - 1 && " ·"}
+                    </span>
+                  </span>
+                ))}
             </p>
           </div>
           {/* Player, then one fixed-width slot (sheet music link, or a
@@ -228,25 +245,6 @@ export default function MusicPage() {
             {p}
           </motion.p>
         ))}
-
-        {/* Jump links to each chapter */}
-        <motion.nav
-          variants={item}
-          aria-label="Music page sections"
-          className="mt-8 flex flex-wrap gap-x-6 gap-y-2 lg:mt-12"
-        >
-          {[{ id: "arrangements", label: "Arrangements" }, { id: "shorts", label: "Shorts" }, { id: "releases", label: "Releases" }].map(
-            (c) => (
-              <a
-                key={c.id}
-                href={`#${c.id}`}
-                className="border-b border-music pb-1 text-sm font-medium uppercase tracking-[0.15em] text-music transition-opacity hover:opacity-60"
-              >
-                {c.label}
-              </a>
-            )
-          )}
-        </motion.nav>
       </motion.section>
 
       {/* 2. Arrangements */}
@@ -285,7 +283,7 @@ export default function MusicPage() {
         {/* 3. Instagram shorts */}
         <div id="shorts" className="mt-16 scroll-mt-24 lg:mt-24 lg:scroll-mt-36">
           <div className="mb-4 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-            <h3 className={subheading}>Short-form on Instagram</h3>
+            <h3 className={subheading}>Instagram Reels</h3>
             {instagram.url && (
               <a
                 href={instagram.url}

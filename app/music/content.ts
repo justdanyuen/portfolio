@@ -77,7 +77,7 @@ export const intro = {
   years: "", // TODO: e.g. "2005 –"
   // TODO: draft text, reword in your own voice
   paragraphs: [
-    "My interest in music started very young, with singing. Long before I knew anything about arranging or production, I just loved to sing, and that love of the human voice has been the through-line of everything on this page.",
+    "Here you can find various works that I've created over the years, spanning from my a cappella arrangement catalog, short-form content, and offical releases. Enjoy!",
   ],
 };
 
@@ -309,7 +309,7 @@ export type Reel = {
 export const instagram = {
   handle: "", // TODO: e.g. "@justdanyuen"
   url: "", // TODO: profile/reels page, e.g. "https://www.instagram.com/<handle>/reels/"
-  blurb: "Short clips of a cappella arrangements, covers, and works in progress.",
+  blurb: "Short clips of a cappella arragements I've recorded, more to come soon...",
   reels: [
     {
       url: "https://www.instagram.com/reel/DYhXKUjNprcNB7h2uRz7D5AZHFv7yw26yhKf1c0/",

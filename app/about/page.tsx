@@ -45,32 +45,53 @@ const calpolyGallery = [
     height: 5051,
   },
   {
+    src: "/images/cal-poly/boothing-2024.webp",
+    alt: "Club Boothing 2024",
+    caption: "Club Fair Boothing, September 2024",
+    width: 1440,
+    height: 960,
+  },
+  {
+    src: "/images/cal-poly/yosemite.webp",
+    alt: "Sheet music learning",
+    caption: "Learning new music on the Take It SLO's Yosemite spring retreat",
+    width: 2304,
+    height: 1536,
+  },
+  {
     src: "/images/cal-poly/morro-rock.webp",
     alt: "Morro Rock",
-    caption: "One of my favorite film photos I took located in Morro Bay, California. A popular landmark along the central coast.",
+    caption: "One of my favorite film photos I took located in Morro Bay, California",
     width: 3130,
     height: 2075,
   },
   {
-    src: "/images/cal-poly/salud.webp",
-    alt: "Salud",
-    caption: "Celebrations sponsored by Modelo :)",
-    width: 5058,
-    height: 3372,
+    src: "/images/cal-poly/fall-concert.webp",
+    alt: "Take It SLO group photo in concert outfits on a red rug",
+    caption: "Take It SLO fall concert",
+    width: 2304,
+    height: 1536,
   },
   {
-    src: "/images/cal-poly/throw.webp",
-    alt: "Throw",
-    caption: "Upwards and onwards!",
-    width: 3456,
-    height: 5184,
+    src: "/images/cal-poly/picnic-spring-2024.webp",
+    alt: "End of year picnic on Terrace Hil",
+    caption: "End of year picnic on Terrace Hill, 2024",
+    width: 2105,
+    height: 1182,
   },
   {
-    src: "/images/cal-poly/valencia-apartment.webp", // fixed filename to match disk
-    alt: "Valencia apartments",
-    caption: "Precursors to the year of a lifetime!",
-    width: 5184,
-    height: 3456,
+    src: "/images/cal-poly/yosemite-seniors.webp",
+    alt: "yosemite take it slo seniors, 2025",
+    caption: "2025 Take It SLO seniors, Yosemite Spring Retreat",
+    width: 1536,
+    height: 2304,
+  },
+  {
+    src: "/images/cal-poly/winter-concert-2024.webp",
+    alt: "Take It SLO group photo in holiday sweaters under a Take It SLO banner",
+    caption: "Take It SLO winter concert, 2024",
+    width: 2316,
+    height: 1270,
   },
 ];
 
@@ -380,7 +401,7 @@ export default async function AboutPage() {
 
       {/* Berklee gallery */}
       <div className="-mt-12 px-6 sm:px-10 lg:px-16">
-        <PhotoStrip photos={berkleeGallery} arrows />
+        <PhotoStrip photos={berkleeGallery} />
       </div>
 
       {/* Photo Carousel Berklee */}
@@ -416,7 +437,7 @@ export default async function AboutPage() {
             the field. On the side, I love creating vocal-arrangements in my 
             free time and keeping in-touch with my creative side. Feel free to
             reach out to me if you'd like to chat about audio or software,
-            I'd love to connect!
+            I'd be happy to connect.
           </p>
           </div>
         </div>

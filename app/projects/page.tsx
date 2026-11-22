@@ -82,27 +82,29 @@ export default function ProjectsPage() {
             <span className="h-2 w-2 shrink-0 rounded-full bg-purple" />
 
             {/* flex-wrap + nowrap phrases: if it wraps on narrow screens,
-                it breaks cleanly between the two phrases, never mid-phrase */}
+                it breaks cleanly between the two phrases (dot moves with the second) */}
             <p className="flex flex-wrap items-center text-xs font-medium uppercase tracking-[0.15em] text-purple sm:tracking-[0.2em]">
               <span className="whitespace-nowrap">Master&apos;s Thesis Project</span>
 
-              {/* Flashing separator dot */}
-              <motion.span
-                className="mx-2 inline-block text-xl leading-none"
-                animate={{
-                  opacity: [1, 0.15, 1],
-                  scale: [1, 1.5, 1],
-                }}
-                transition={{
-                  duration: 1.4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                •
-              </motion.span>
-
-              <span className="whitespace-nowrap">Active Development</span>
+              {/* Flashing separator dot, kept with the second phrase so a wrap
+                  never leaves it dangling at the end of a line */}
+              <span className="inline-flex items-center whitespace-nowrap">
+                <motion.span
+                  className="mx-2 inline-block text-xl leading-none"
+                  animate={{
+                    opacity: [1, 0.15, 1],
+                    scale: [1, 1.5, 1],
+                  }}
+                  transition={{
+                    duration: 1.4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  •
+                </motion.span>
+                Active Development
+              </span>
             </p>
           </div>
 

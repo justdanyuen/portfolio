@@ -18,7 +18,7 @@ export default function Screenshots({ photos }: { photos: LightboxPhoto[] }) {
             key={photo.src}
             type="button"
             onClick={() => setActive(index)}
-            className="group relative aspect-video cursor-zoom-in overflow-hidden rounded-xl bg-black/5 sm:w-[22.5%]"
+            className="group relative aspect-video cursor-pointer overflow-hidden rounded-xl bg-black/5 sm:w-[22.5%]"
           >
             <Image
               src={withBasePath(photo.src)}

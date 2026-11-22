@@ -50,3 +50,7 @@ PRODUCT.md
 # (.m4a/.mp3 demos, .webp reel covers)
 /public/audio/**/*.wav
 /public/images/music/reels/*.JPG
+# Cal Poly gallery originals (the site uses the .webp copies)
+/public/images/cal-poly/*.jpg
+/public/images/cal-poly/*.JPG
+/public/images/cal-poly/*.jpeg

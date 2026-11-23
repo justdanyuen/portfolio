@@ -56,12 +56,3 @@ figcaption {
   text-wrap: pretty;
 }
 
-/* Album-cover strip on the About page (components/AlbumMarquee) */
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}

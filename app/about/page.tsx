@@ -310,6 +310,18 @@ export default async function AboutPage() {
           </p>
 
           <p className="mt-5 text-lg sm:text-xl lg:mt-0 lg:mb-8 lg:last:mb-0 lg:text-2xl leading-relaxed text-foreground/80">
+            After taking a course in artificial intelligence, I built my senior project
+            around a simple question: how well can a large language model play{" "}
+            <em>Codenames</em>? Building on an open-source Codenames AI framework, I
+            added Anthropic&apos;s <em>Claude Opus</em> as an AI spymaster, giving
+            one-word clues to human guessers through a Python game server and TypeScript
+            web interface, and compared it against a traditional word-embedding
+            spymaster on speed, accuracy, and costly mistakes like hitting the
+            &quot;assassin.&quot; Next, I plan to host it on AWS EC2 and open-source it
+            as a multiplayer server for playing against, and comparing, different LLMs.
+          </p>
+
+          <p className="mt-5 text-lg sm:text-xl lg:mt-0 lg:mb-8 lg:last:mb-0 lg:text-2xl leading-relaxed text-foreground/80">
             A large part of my college experience was spent with my time
             in Take It SLO, Cal Poly's premier acappella group. Coming into
             college, I was a huge fan of the acappella scene popularized by

@@ -59,7 +59,7 @@ export type Arrangement = {
   originalArtist: string;
   /** e.g. "SATB", "TTBB", "SSAA + VP" */
   voicing?: string;
-  /** Co-arrangers, shown as "arr. with ..." */
+  /** Co-arrangers, shown as "co-arranged with ..." */
   coArrangers?: string[];
   year?: string;
   /** For in-progress works, what stage it's at, e.g. "Drafting", "In rehearsal" */

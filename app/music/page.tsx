@@ -162,7 +162,7 @@ function ArrangementList({
               {[
                 `Originally by ${a.originalArtist}`,
                 a.voicing,
-                a.coArrangers?.length && `arr. with ${a.coArrangers.join(" & ")}`,
+                a.coArrangers?.length && `co-arranged with ${a.coArrangers.join(" & ")}`,
                 a.year,
               ]
                 .filter(Boolean)
@@ -176,6 +176,15 @@ function ArrangementList({
                   </span>
                 ))}
             </p>
+            {/* Published works: part tracks on request (opens an email) */}
+            {!inProgress && (
+              <a
+                href={`mailto:jdyuen03@gmail.com?subject=${encodeURIComponent(`Part tracks: ${a.title}`)}`}
+                className="mt-2 inline-block rounded-md border border-music/40 px-2 py-0.5 text-xs font-medium text-music transition-colors hover:bg-music/10"
+              >
+                Part tracks available upon request
+              </a>
+            )}
           </div>
           {/* Player, then one fixed-width slot (sheet music link, or a
               "coming soon" tag) so every row's controls line up */}
@@ -233,7 +242,7 @@ export default function MusicPage() {
           variants={item}
           className="font-sans text-3xl font-bold text-foreground sm:text-4xl"
         >
-          MUSIC / ARRANGEMENTS
+          MUSIC
         </motion.h1>
 
         {intro.paragraphs.map((p) => (
